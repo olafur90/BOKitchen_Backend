@@ -2,9 +2,7 @@ package com.example.matholl.Services.Implementation;
 
 
 import com.example.matholl.Persistence.Entities.FoodType;
-import com.example.matholl.Persistence.Entities.Ingredient;
 import com.example.matholl.Persistence.Entities.Recipe;
-import com.example.matholl.Persistence.Repositories.IngredientRepository;
 import com.example.matholl.Persistence.Repositories.RecipeRepository;
 import com.example.matholl.Services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import java.util.List;
 public class RecipeServiceImplementation implements RecipeService {
 
     private RecipeRepository recipeRepository;
-    private IngredientRepository ingredientRepository;
 
     @Autowired
     public RecipeServiceImplementation(RecipeRepository recipeRepository) {

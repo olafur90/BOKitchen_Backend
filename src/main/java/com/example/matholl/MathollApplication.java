@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-@EnableJpaRepositories
+// @EnableJpaRepositories
 public class MathollApplication extends SpringBootServletInitializer {
 
 	@Override
