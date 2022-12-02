@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link rel="stylesheet" th:href="@{/hamburgerMenu.css}" />
+    <title>Bóla Mathöll</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="navbar">
+                <div class="container nav-container">
+                    <input class="checkbox" type="checkbox" name="" id="" />
+                    <div class="hamburger-lines">
+                        <span class="line line1"></span>
+                        <span class="line line2"></span>
+                        <span class="line line3"></span>
+                    </div>
+                    <div class="logo">
+                        <h1 th:text="${#strings.capitalize(foodtype)}"></h1>
+                    </div>
+                    <div class="menu-items">
+                        <li><a th:href="@{/}">Forsíða</a></li>
+                        <li><a th:href="@{./kjuklingur}">Kjúklingur</a></li>
+                        <li><a th:href="@{./pasta}">Pasta</a></li>
+                        <li><a th:href="@{./hakk}">Hakk</a></li>
+                        <li><a th:href="@{./supur}">Súpur</a></li>
+                        <li><a th:href="@{./fiskur}">Fiskur</a></li>
+                        <li><a th:href="@{./kjot}">Kjöt</a></li>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<div class="container">
+    <form style="margin: auto; display: flex; flex-direction: column; width: 20%;" method="post" action="" th:object="${recipe}" enctype="multipart/form-data">
+        <label for="name">Nafn uppskriftar</label>
+        <input type="text" id="name" name="name" />
+        <label for="description">Lýsing uppskriftar</label>
+        <textarea id="description" name="description"></textarea>
+        <label for="timetocook">Hversu langan tíma tekur að elda uppskriftina?</label>
+        <input type="text" id="timetocook" name="timetocook" />
+        <label for="longDescription">Lýsing á uppskrift:</label>
+        <textarea id="longDescription" name="longDescription"></textarea>
+        <label for="numberofpeople">Fyrir fjölda manns</label>
+        <input type="text" id="numberofpeople" name="numberofpeople" />
+        <div style="display: flex;">
+            <label>
+                <input type="radio" name="foodType" value="hakk" />Hakk
+            </label>
+            <label>
+                <input type="radio" name="foodType" value="pasta"/>Pasta
+            </label>
+            <label>
+                <input type="radio" name="foodType" value="fiskur" />Fiskur
+            </label>
+            <label>
+                <input type="radio" name="foodType" value="kjot" />Kjöt
+            </label>
+            <label>
+                <input type="radio" name="foodType" value="supur" />Súpur
+            </label>
+
+        </div>
+        <p>Or enter an image URL:</p>
+        <input type="url" id="imageUrl" name="imageUrl"/>
+        <input type="submit" style="height: 2rem; width: 60%; margin: 1rem auto;" value="submit" />
+    </form>
+</div>
+
+<footer>
+</footer>
+</body>

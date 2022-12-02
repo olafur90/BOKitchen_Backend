@@ -1,0 +1,11 @@
+
+@import url('global.css');
+@import url('header.css');
+@import url('footer.css');
+@import url('content.css');
+
+@font-face {
+  font-family: Gotu;
+  src: url("fonts/Gotu/Gotu-Regular.ttf");
+}
+
