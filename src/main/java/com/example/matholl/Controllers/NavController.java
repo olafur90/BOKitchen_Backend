@@ -55,7 +55,7 @@ public class NavController {
         model.addAttribute("foodtype", foodType);
         List<Recipe> recipes = recipeService.findRecipesByFoodType(foodType);
         model.addAttribute("recipes", recipes);
-        return "foodType";
+        return "foodtype";
     }
 
     @RequestMapping(value = "newRecipe", method = RequestMethod.GET)
