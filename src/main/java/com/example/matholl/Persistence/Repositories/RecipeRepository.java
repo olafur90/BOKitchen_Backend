@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
-@Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     public Recipe save(Recipe recipe);
     public void delete(Recipe recipe);
