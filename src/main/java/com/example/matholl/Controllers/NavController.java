@@ -44,7 +44,7 @@ public class NavController {
         return "home";
     }
 
-    @RequestMapping(value = "uppskriftir/{foodtype}/", method = RequestMethod.GET)
+    @RequestMapping(value = "uppskriftir/{foodtype}", method = RequestMethod.GET)
     public String goToFoodType(@PathVariable("foodtype") String foodType, Model model) {
         // CreateDummyData();
         model.addAttribute("foodtype", foodType);
