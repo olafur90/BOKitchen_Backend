@@ -24,29 +24,40 @@
                         <li><a th:href="@{/}">Forsíða</a></li>
                         <li><a th:href="@{uppskriftir/kjuklingur}">Kjúklingur</a></li>
                         <li><a th:href="@{uppskriftir/pasta}">Pasta</a></li>
-                        <li><a th:href="@{/hakk}">Hakk</a></li>
-                        <li><a th:href="@{/supur}">Súpur</a></li>
-                        <li><a th:href="@{/fiskur}">Fiskur</a></li>
-                        <li><a th:href="@{/kjot}">Kjöt</a></li>
+                        <li><a th:href="@{uppskriftir/hakk}">Hakk</a></li>
+                        <li><a th:href="@{uppskriftir/supur}">Súpur</a></li>
+                        <li><a th:href="@{uppskriftir/fiskur}">Fiskur</a></li>
+                        <li><a th:href="@{uppskriftir/kjot}">Kjöt</a></li>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
 
+
+
 <div class="container">
-    <form style="margin: auto; display: flex; flex-direction: column; width: 20%;" method="post" action="" th:object="${recipe}" enctype="multipart/form-data">
+
+    <!-- Form fyrir nýja uppskrift-->
+    <form class="newRecipeForm" method="post" action="" th:object="${recipe}" enctype="multipart/form-data">
+
         <label for="name">Nafn uppskriftar</label>
-        <input type="text" id="name" name="name" />
-        <label for="description">Lýsing uppskriftar</label>
-        <textarea id="description" name="description"></textarea>
+        <input type="text" id="name" name="name" class="roundedBorder" />
+
+        <label for="description">Stutt lýsing uppskriftar</label>
+        <textarea rows="5" id="description" name="description" class="roundedBorder"></textarea>
+
         <label for="timetocook">Hversu langan tíma tekur að elda uppskriftina?</label>
-        <input type="text" id="timetocook" name="timetocook" />
+        <input type="text" id="timetocook" name="timetocook" class="roundedBorder" />
+
         <label for="longDescription">Löng lýsing á uppskrift:</label>
-        <textarea id="longDescription" name="longDescription"></textarea>
+        <textarea rows="10" id="longDescription" name="longDescription" class="roundedBorder"></textarea>
+
         <label for="numberofpeople">Fyrir fjölda manns</label>
-        <input type="text" id="numberofpeople" name="numberofpeople" />
-        <div style="display: flex;">
+        <input style="width:40%;" type="text" id="numberofpeople" name="numberofpeople" class="roundedBorder" />
+
+        <!-- Radio buttons til að velja matarflokk. Má bæta seinna með lausn til að velja fleiri en einn flokk -->
+        <div class="newCourseRadioButtons">
             <label>
                 <input type="radio" name="foodType" value="hakk" />Hakk
             </label>
@@ -62,11 +73,14 @@
             <label>
                 <input type="radio" name="foodType" value="supur" />Súpur
             </label>
-
         </div>
-        <p>Or enter an image URL:</p>
-        <input type="url" id="imageUrl" name="imageUrl"/>
-        <input type="submit" style="height: 2rem; width: 60%; margin: 1rem auto;" value="submit" />
+        <!-- -->
+
+        <p>Hlekkur á mynd:</p>
+        <input type="url" class="roundedBorder" id="imageUrl" name="imageUrl"/>
+
+        <!-- Submit -->
+        <input type="submit" class="roundedBorder" value="submit" />
     </form>
 </div>
 

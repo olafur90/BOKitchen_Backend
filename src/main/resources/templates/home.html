@@ -21,13 +21,17 @@
                         <h1>Bóla Mathöll</h1>
                     </div>
                     <div class="menu-items">
-                        <li><a th:href="@{/}">Forsíða</a></li>
+                        <li><a style="font-size: 2rem;" th:href="@{/}">Forsíða</a></li>
+                        <hr>
+                        <li><p>Aðalréttir</p></li>
                         <li><a th:href="@{uppskriftir/kjuklingur}">Kjúklingur</a></li>
                         <li><a th:href="@{uppskriftir/pasta}">Pasta</a></li>
                         <li><a th:href="@{uppskriftir/hakk}">Hakk</a></li>
                         <li><a th:href="@{uppskriftir/supur}">Súpur</a></li>
                         <li><a th:href="@{uppskriftir/fiskur}">Fiskur</a></li>
                         <li><a th:href="@{uppskriftir/kjot}">Kjöt</a></li>
+                        <hr>
+                        <li><a th:href="@{uppskriftir/sosur}">Sósur</a></li>
                     </div>
                 </div>
             </div>
@@ -72,6 +76,20 @@
                 <div class="food-type">
                     <a th:href="@{uppskriftir/sosur}"><img src="/img/sauce.jpg" alt="kdkd" /></a>
                     <h4>Sósur</h4>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="courseTypesMenu">
+            <h2><u>Bakkelsi</u></h2>
+            <div class="courseTypes">
+                <div class="food-type">
+                    <a th:href="@{uppskriftir/sosur}"><img src="/img/sauce.jpg" alt="kdkd" /></a>
+                    <h4>Brauðréttir</h4>
+                </div>
+                <div class="food-type">
+                    <a th:href="@{uppskriftir/sosur}"><img src="/img/sauce.jpg" alt="kdkd" /></a>
+                    <h4>Kökur</h4>
                 </div>
             </div>
         </div>

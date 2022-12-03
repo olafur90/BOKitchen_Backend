@@ -6,10 +6,6 @@
   box-sizing: border-box;
 }
 
-body {
-  
-}
-
 .container {
   font-family: "Poppins", sans-serif;
   max-width: 1050px;
@@ -103,7 +99,7 @@ body {
 }
 
 .navbar .menu-items {
-  padding-top: 120px;
+  padding-top: 60px;
   background-color: #d8caff;
   height: 100vh;
   width: 100%;
@@ -115,10 +111,21 @@ body {
   text-align: center;
 }
 
+.navbar .menu-items hr {
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  width: 50%;
+}
+
 .navbar .menu-items li {
   margin-bottom: 1.2rem;
   font-size: 2rem;
   font-weight: 500;
+}
+
+.menu-items li p {
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 .logo {
