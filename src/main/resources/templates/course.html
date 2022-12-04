@@ -23,12 +23,12 @@
                     </div>
                     <div class="menu-items">
                         <li><a th:href="@{/}">Forsíða</a></li>
-                        <li><a th:href="@{./kjuklingur}">Kjúklingur</a></li>
-                        <li><a th:href="@{./pasta}">Pasta</a></li>
-                        <li><a th:href="@{./hakk}">Hakk</a></li>
-                        <li><a th:href="@{./supur}">Súpur</a></li>
-                        <li><a th:href="@{./fiskur}">Fiskur</a></li>
-                        <li><a th:href="@{./kjot}">Kjöt</a></li>
+                        <li><a th:href="@{/uppskriftir/kjuklingur}">Kjúklingur</a></li>
+                        <li><a th:href="@{/uppskriftir/pasta}">Pasta</a></li>
+                        <li><a th:href="@{/uppskriftir/hakk}">Hakk</a></li>
+                        <li><a th:href="@{/uppskriftir/supur}">Súpur</a></li>
+                        <li><a th:href="@{/uppskriftir/fiskur}">Fiskur</a></li>
+                        <li><a th:href="@{/uppskriftir/kjot}">Kjöt</a></li>
                     </div>
                 </div>
             </div>
@@ -39,15 +39,24 @@
             <div class="recipeInfo">
                 <h3 th:text="${recipe.name}"></h3>
                 <p th:text="${recipe.shortDescription}"></p>
+                <ul>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                </ul>
                 <ul th:if="${ingredients} != null">
                     <li th:each="ingredient : ${ingredients}" th:text="${ingredient.ingredientName}"></li>
                 </ul>
             </div>
             <img th:if="${recipe.imageLink != null}"  th:src="${recipe.imageLink}" />
         </div>
-        <hr>
         <div class="courseBody">
-            <p th:text="${recipe.description}" th:if="${recipe.description} != null"></p>
+            <p style="white-space: pre-line; " th:text="${recipe.description}" th:if="${recipe.description} != null"></p>
         </div>
     </div>
 </body>

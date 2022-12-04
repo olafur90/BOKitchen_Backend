@@ -35,13 +35,14 @@
     </header>
 
     <main>
+        <button onclick="location.href='/newRecipe'" type="button">Ný uppskrift</button>
         <div class="courses">
             <div class="courseItem" th:each="recipe : ${recipes}">
                 <div class="courseInfo">
                     <div>
                         <a th:href="@{./{f}/{id}(id=${recipe.getID()}, f=${recipe.getFoodType()})}" th:text="${recipe.name}"></a>
-                        <p th:text="${#strings.substring(recipe.shortDescription, 0, 60)} + '...'" th:if="${#strings.length(recipe.shortDescription) > 60}"></p>
-                        <p th:text="${recipe.shortDescription}" th:if="${#strings.length(recipe.shortDescription) <= 60}"></p>
+                        <p th:text="${#strings.substring(recipe.shortDescription, 0, 250)} + '...'" th:if="${#strings.length(recipe.shortDescription) > 250}"></p>
+                        <p th:text="${recipe.shortDescription}" th:if="${#strings.length(recipe.shortDescription) <= 250}"></p>
                     </div>
 
                     <div>

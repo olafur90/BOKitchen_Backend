@@ -43,6 +43,14 @@ menu { min-height: 100vh; }
     width: 70%;
 }
 
+.food-type img {
+    transition: transform .4s;
+}
+
+.food-type img:hover {
+    transform: scale(1.3);
+}
+
 .food-type a:hover {
     color: red;
 }
@@ -64,28 +72,35 @@ menu { min-height: 100vh; }
     flex-direction: row;
     justify-content: space-between;
     width: 80%;
-    border: 1px solid black;
+    border: 2px solid rgb(71, 60, 97);
+    border-radius: 5px;
+    box-shadow:5px 2px 5px 0 rgb(60 60 60);
 }
 
 .courseItem img {
-    width: 40%;
+    width: 30%;
     aspect-ratio: 1 / 1;
     margin: 10px 0;
     margin-right: 10px;
-    border: 1px solid black;
+    box-shadow:5px 2px 5px 0 rgb(60 60 60);
 }
 
-.courseItem a {
-    font-size: 1.2rem;
+.courseInfo a {
+    font-size: 1.5rem;
+    color: rgb(56, 92, 61);
+    font-weight: bold;
+}
+
+.courseInfo p {
+    margin-top: .5rem;
 }
 
 .course {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 60%;
     padding: 1rem 0;
     margin: 2rem auto;
-    border: 3px solid black;
     box-shadow:0 0 0 0 rgb(60 60 60);
 }
 
@@ -106,7 +121,7 @@ menu { min-height: 100vh; }
 }
 
 .courseHeader img {
-    max-width: 25%;
+    max-height: 250px;
     aspect-ratio: 1 / 1;
     margin: 10px 0;
     margin-right: 10px;

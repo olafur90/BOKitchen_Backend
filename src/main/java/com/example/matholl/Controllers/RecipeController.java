@@ -51,4 +51,25 @@ public class RecipeController {
         return "course";
     }
 
+    @RequestMapping(value = "/uppskriftir/{foodtype}/{id}/editRecipe", method = RequestMethod.GET)
+    public String editRecipe(@PathVariable("id") String id, Model model) {
+        Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
+        model.addAttribute("recipe", recipe);
+        return "editRecipe";
+    }
+
+    @RequestMapping(value = "/uppskriftir/{foodtype}/{id}/editRecipe", method = RequestMethod.POST)
+    public String editRecipePOST(@PathVariable("id") String id, @RequestParam("name") String name, String description, String timetocook, String longDescription, String numberofpeople, String imageUrl, String foodType) {
+        Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
+        recipe.setName(name);
+        recipe.setShortDescription(description);
+        recipe.setTimeToCook(timetocook);
+        recipe.setDescription(longDescription);
+        recipe.setForNumberOfPeople(numberofpeople);
+        recipe.setImageLink(imageUrl);
+        recipe.setFoodType(foodType);
+        recipeService.save(recipe);
+        return "redirect:/uppskriftir/{foodtype}/{id}";
+    }
+
 }

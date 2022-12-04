@@ -27,6 +27,7 @@
 
 .navbar .menu-items {
   display: flex;
+  color: #ca5555;
 }
 
 .navbar .nav-container li {
@@ -35,7 +36,7 @@
 
 .navbar .nav-container a {
   text-decoration: none;
-  color: #0e2431;
+  color: #acdbc9;
   font-weight: 500;
   font-size: 1.2rem;
   padding: 0.7rem;
@@ -100,7 +101,7 @@
 
 .navbar .menu-items {
   padding-top: 60px;
-  background-color: #d8caff;
+  background-color: #332d44;
   height: 100vh;
   width: 100%;
   transform: translateY(-200%);

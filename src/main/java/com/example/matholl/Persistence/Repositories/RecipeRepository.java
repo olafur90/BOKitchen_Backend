@@ -16,6 +16,5 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     public List<Recipe> findRecipesByFoodType(String foodType);
     public FoodType findFoodTypeByName(String name);
     public List<Recipe> save(List<Recipe> recipes);
-
     
 }

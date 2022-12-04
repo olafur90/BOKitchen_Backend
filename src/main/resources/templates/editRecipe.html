@@ -39,27 +39,30 @@
 <div class="container">
 
     <!-- Form fyrir nýja uppskrift-->
-    <form class="newRecipeForm" method="post" action="" th:object="${recipe}" enctype="multipart/form-data">
+    <form class="newRecipeForm" method="post" action="" th:object="${recipe}">
 
         <label for="name">Nafn uppskriftar</label>
-        <input type="text" id="name" name="name" class="roundedBorder" />
+        <input th:value="${recipe.name}" type="text" id="name" name="name" class="roundedBorder" />
 
         <label for="description">Stutt lýsing uppskriftar</label>
-        <textarea rows="5" id="description" name="description" class="roundedBorder"></textarea>
+        <textarea th:text="${recipe.shortDescription}" rows="5" id="description" name="description" class="roundedBorder"></textarea>
 
         <label for="timetocook">Hversu langan tíma tekur að elda réttinn?</label>
-        <input type="text" id="timetocook" name="timetocook" class="roundedBorder" />
+        <input th:value="${recipe.timeToCook}" type="text" id="timetocook" name="timetocook" class="roundedBorder" />
 
         <label for="longDescription">Löng lýsing á uppskrift:</label>
-        <textarea rows="10" id="longDescription" name="longDescription" class="roundedBorder"></textarea>
+        <textarea th:text="${recipe.description}" rows="10" id="longDescription" name="longDescription" class="roundedBorder"></textarea>
 
         <label for="numberofpeople">Fyrir fjölda manns</label>
-        <input style="width:40%;" type="text" id="numberofpeople" name="numberofpeople" class="roundedBorder" />
+        <input th:value="${recipe.forNumberOfPeople}" style="width:40%;" type="text" id="numberofpeople" name="numberofpeople" class="roundedBorder" />
 
         <!-- Radio buttons til að velja matarflokk. Má bæta seinna með lausn til að velja fleiri en einn flokk -->
         <div class="newCourseRadioButtons">
             <label>
                 <input type="radio" name="foodType" value="hakk" />Hakk
+            </label>
+            <label>
+                <input type="radio" name="foodType" value="kjuklingur" />kjúklingur
             </label>
             <label>
                 <input type="radio" name="foodType" value="pasta"/>Pasta
@@ -76,8 +79,10 @@
         </div>
         <!-- -->
 
+        
         <p>Hlekkur á mynd:</p>
-        <input type="url" class="roundedBorder" id="imageUrl" name="imageUrl"/>
+        <input th:value="${recipe.imageLink}" type="url" class="roundedBorder" id="imageUrl" name="imageUrl"/>
+        <img style="margin: auto; max-width: 300px;" th:src="${recipe.imageLink}" />
 
         <!-- Submit -->
         <input type="submit" class="roundedBorder" value="submit" />

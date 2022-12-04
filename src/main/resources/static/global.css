@@ -21,3 +21,14 @@ table {
 input {
     margin-bottom: .7rem;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    margin: 0 auto;
+}
