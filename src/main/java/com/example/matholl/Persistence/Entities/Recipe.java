@@ -14,12 +14,26 @@ public class Recipe {
     private String name;
     private String shortDescription;
     private String description;
-    private List<Ingredient> ingredients;
     private String timeToCook;
     private String forNumberOfPeople;
     private LocalDate dateAdded;
     private String foodType;
     private String imageLink;
+    private User user;
+    private List<String> foodTypes;
+    // private List<Ingredient> ingredients;
+
+
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
     public String getFoodType() {
         return foodType;
@@ -69,16 +83,17 @@ public class Recipe {
     public void setForNumberOfPeople(String numberOfPeople) { this.forNumberOfPeople = numberOfPeople; }
 
     @OneToMany (mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<Ingredient> getIngredients() { return ingredients; }
-    public void setIngredients(List<Ingredient> ingredients) { this.ingredients = ingredients; }
+    //public List<Ingredient> getIngredients() { return ingredients; }
+    //public void setIngredients(List<Ingredient> ingredients) { this.ingredients = ingredients; }
 
     public void addIngredient(Ingredient ingredient) {
-        this.ingredients.add(ingredient);
+        // this.ingredients.add(ingredient);
     }
 
     public String getTimeToCook() { return timeToCook; }
     public void setTimeToCook(String timeToCook) { this.timeToCook = timeToCook; }
 
+    @Lob
     public String getShortDescription() { return shortDescription; }
     public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
 
@@ -91,11 +106,11 @@ public class Recipe {
         this.imageLink = "";
         this.instructions = instructions;
         this.shortDescription = shortDescription;
-        this.ingredients = new ArrayList<>();
         this.timeToCook = timeToCook;
         this.forNumberOfPeople = forNumberOfPeople;
         this.dateAdded = LocalDate.now();
         this.foodType = foodType;
+        //this.ingredients = new ArrayList<>();
     }
 
     @Id

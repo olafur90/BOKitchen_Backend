@@ -24,13 +24,18 @@ public class User {
     private String lastName;
     private String username;
     private String email;
+    private List<Recipe> recipes;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "RecipeID")
-    private List<Recipe> recipeList;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
 
     @Id
-    @Column(name = "CommentId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getID() {
         return ID;

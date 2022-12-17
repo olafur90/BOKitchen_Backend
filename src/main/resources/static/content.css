@@ -3,7 +3,7 @@
 }
 
 menu hr {
-    width: 70%;
+    width: 30%;
     margin: auto;
 }
 
@@ -20,9 +20,9 @@ menu { min-height: 100vh; }
 }
 
 .courseTypesMenu img {
-    width: 5rem;
-    height: 5rem;
-    max-height: 5rem;
+    width: 6rem;
+    height: 6rem;
+    max-height: 7rem;
     border-radius:3px;
     box-shadow:2px 2px 5px 0 rgb(60 60 60);
 }
@@ -40,7 +40,7 @@ menu { min-height: 100vh; }
     display: flex;
     flex-direction: column;
     margin: auto;
-    width: 70%;
+    width: 100%;
 }
 
 .food-type img {

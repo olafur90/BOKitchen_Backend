@@ -10,7 +10,6 @@ import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 
-@Configuration
 public class AdditionalResourceWebConfiguration implements WebMvcConfigurer {
 
     @Override

@@ -2,9 +2,9 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
     <link rel="stylesheet" th:href="@{/hamburgerMenu.css}" />
-    <title th:text="${foodtype}"></title>
+    <title th:text="${'Bóla Mathöll - ' + #strings.capitalize(foodtype)}"></title>
 </head>
 <body>
     <header>
@@ -35,7 +35,7 @@
     </header>
 
     <main>
-        <button onclick="location.href='/newRecipe'" type="button">Ný uppskrift</button>
+        <button th:if="${session.userLoggedIn != null}" onclick="location.href='/newRecipe'" type="button">Ný uppskrift</button>
         <div class="courses">
             <div class="courseItem" th:each="recipe : ${recipes}">
                 <div class="courseInfo">
@@ -47,7 +47,7 @@
 
                     <div>
                         <p style="margin-top:3rem;" th:text="'Tími: ' + ${recipe.timeToCook}"></p>
-                        <p th:text="'Fyrir : ' + @{${recipe.forNumberOfPeople}}"></p>
+                        <p th:text="'Fyrir : ' + ${recipe.forNumberOfPeople}"></p>
                     </div>
                 </div>
                 <img th:if="${recipe.imageLink != null}"  th:src="${recipe.imageLink}" />

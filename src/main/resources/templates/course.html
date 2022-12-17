@@ -2,9 +2,9 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/styles.css}" />
-    <link rel="stylesheet" th:href="@{/hamburgerMenu.css}" />
-    <link rel="stylesheet" th:href="@{/course.css}" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/hamburgerMenu.css}" />
+    <link rel="stylesheet" th:href="@{/css/course.css}" />
     <title>Title</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
                         <span class="line line3"></span>
                     </div>
                     <div class="logo">
-                        <h1 th:text="${#strings.capitalize(recipe.name)}"></h1>
+                        <h1>Bóla Mathöll</h1>
                     </div>
                     <div class="menu-items">
                         <li><a th:href="@{/}">Forsíða</a></li>
@@ -38,26 +38,18 @@
         <div class="courseHeader">
             <div class="recipeInfo">
                 <h3 th:text="${recipe.name}"></h3>
-                <p th:text="${recipe.shortDescription}"></p>
-                <ul>
-                    <li>test</li>
-                    <li>test</li>
-                    <li>test</li>
-                    <li>test</li>
-                    <li>test</li>
-                    <li>test</li>
-                    <li>test</li>
-                    <li>test</li>
-                </ul>
                 <ul th:if="${ingredients} != null">
                     <li th:each="ingredient : ${ingredients}" th:text="${ingredient.ingredientName}"></li>
                 </ul>
+                <p style="white-space: pre-line; line-height: 2rem;" th:text="${recipe.shortDescription}"></p>
             </div>
             <img th:if="${recipe.imageLink != null}"  th:src="${recipe.imageLink}" />
         </div>
+        <hr>
         <div class="courseBody">
-            <p style="white-space: pre-line; " th:text="${recipe.description}" th:if="${recipe.description} != null"></p>
+            <p style="white-space: pre-line; line-height: 2rem;" th:text="${recipe.description}" th:if="${recipe.description} != null"></p>
         </div>
     </div>
+    <a th:href="@{/uppskriftir/{f}/{i}/editRecipe(f=${recipe.getFoodType}, i=${id})}"><button type="button">Breyta</button></a>
 </body>
 </html>

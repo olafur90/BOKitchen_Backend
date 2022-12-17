@@ -13,7 +13,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,16 +32,8 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/newRecipe", method = RequestMethod.POST)
-    public String newRecipePOST(@RequestParam("foodType") String foodType, @RequestParam("longDescription") String longDescription, String name, String description, String timetocook, String numberofpeople, @RequestParam("imageUrl") String imageUrl) throws IOException {
-        Recipe recipe = new Recipe("", name, description, timetocook, numberofpeople, foodType);
-        recipe.setDescription(longDescription);
-        if (!imageUrl.isEmpty()) {
-            recipe.setImageLink(imageUrl);
-        } else {
-            recipe.setImageLink("/img/chicken.jpg");
-        }
+    public String newRecipePOST(Recipe recipe) {
         recipeService.save(recipe);
-
         return "redirect:/";
     }
 
@@ -52,22 +47,19 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/uppskriftir/{foodtype}/{id}/editRecipe", method = RequestMethod.GET)
-    public String editRecipe(@PathVariable("id") String id, Model model) {
+    public String editRecipe(@PathVariable("id") String id, Model model, HttpSession session) {
+        if (session.getAttribute("userLoggedIn") == null) {
+            System.err.println(session.getAttribute("userLoggedIn"));
+            return "redirect:/login";
+        }
         Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
         model.addAttribute("recipe", recipe);
         return "editRecipe";
     }
 
     @RequestMapping(value = "/uppskriftir/{foodtype}/{id}/editRecipe", method = RequestMethod.POST)
-    public String editRecipePOST(@PathVariable("id") String id, @RequestParam("name") String name, String description, String timetocook, String longDescription, String numberofpeople, String imageUrl, String foodType) {
-        Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
-        recipe.setName(name);
-        recipe.setShortDescription(description);
-        recipe.setTimeToCook(timetocook);
-        recipe.setDescription(longDescription);
-        recipe.setForNumberOfPeople(numberofpeople);
-        recipe.setImageLink(imageUrl);
-        recipe.setFoodType(foodType);
+    public String editRecipePOST(Recipe recipe, @PathVariable("id") String id) {
+        recipe.setID(Long.parseLong(id));
         recipeService.save(recipe);
         return "redirect:/uppskriftir/{foodtype}/{id}";
     }

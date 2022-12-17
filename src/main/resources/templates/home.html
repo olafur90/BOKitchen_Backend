@@ -2,45 +2,44 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/styles.css}" />
-    <link rel="stylesheet" th:href="@{/hamburgerMenu.css}" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/hamburgerMenu.css}" />
     <title>Bóla Mathöll</title>
 </head>
 <body>
     <header>
-        <nav>
-            <div class="navbar">
-                <div class="container nav-container">
-                    <input class="checkbox" type="checkbox" name="" id="" />
-                    <div class="hamburger-lines">
-                        <span class="line line1"></span>
-                        <span class="line line2"></span>
-                        <span class="line line3"></span>
-                    </div>
-                    <div class="logo">
-                        <h1>Bóla Mathöll</h1>
-                    </div>
-                    <div class="menu-items">
-                        <li><a style="font-size: 2rem;" th:href="@{/}">Heim</a></li>
-                        <hr>
-                        <li><p>Aðalréttir</p></li>
-                        <li><a th:href="@{uppskriftir/kjuklingur}">Kjúklingur</a></li>
-                        <li><a th:href="@{uppskriftir/pasta}">Pasta</a></li>
-                        <li><a th:href="@{uppskriftir/hakk}">Hakk</a></li>
-                        <li><a th:href="@{uppskriftir/supur}">Súpur</a></li>
-                        <li><a th:href="@{uppskriftir/fiskur}">Fiskur</a></li>
-                        <li><a th:href="@{uppskriftir/kjot}">Kjöt</a></li>
-                        <hr>
-                        <li><p>Meðlæti</p></li>
-                        <li><a th:href="@{uppskriftir/sosur}">Sósur</a></li>
-                        <hr>
-                        <li><p>Annað</p></li>
-                        <li><a th:href="@{uppskriftir/braudrettir}">Brauðréttir</a></li>
-                        <li><a th:href="@{uppskriftir/kokur}">Kökur</a></li>
-                    </div>
+        <div class="navbar">
+            <div class="container nav-container">
+                <input class="checkbox" type="checkbox" name="" id="" />
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>
+                <div class="logo">
+                    <h1 style="margin-top: 0;">Bóla Mathöll</h1>
+                </div>
+                
+                <div class="menu-items">
+                    <li><a style="font-size: 2rem;" th:href="@{/}">Heim</a></li>
+                    <hr>
+                    <li><p>Aðalréttir</p></li>
+                    <li><a th:href="@{uppskriftir/kjuklingur}">Kjúklingur</a></li>
+                    <li><a th:href="@{uppskriftir/pasta}">Pasta</a></li>
+                    <li><a th:href="@{uppskriftir/hakk}">Hakk</a></li>
+                    <li><a th:href="@{uppskriftir/supur}">Súpur</a></li>
+                    <li><a th:href="@{uppskriftir/fiskur}">Fiskur</a></li>
+                    <li><a th:href="@{uppskriftir/kjot}">Kjöt</a></li>
+                    <hr>
+                    <li><p>Meðlæti</p></li>
+                    <li><a th:href="@{uppskriftir/sosur}">Sósur</a></li>
+                    <hr>
+                    <li><p>Annað</p></li>
+                    <li><a th:href="@{uppskriftir/braudrettir}">Brauðréttir</a></li>
+                    <li><a th:href="@{uppskriftir/kokur}">Kökur</a></li>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
     <menu>
         <div class="courseTypesMenu">
@@ -82,6 +81,11 @@
                     <a th:href="@{uppskriftir/sosur}"><img src="/img/sauce.jpg" alt="kdkd" /></a>
                     <h4>Sósur</h4>
                 </div>
+                <div class="food-type">
+                    <a th:href="@{uppskriftir/kartoflur}"><img src="https://thecozycook.com/wp-content/uploads/2019/07/Grilled-Rosemary-Potatoes-.jpg" alt="kdkd" /></a>
+                    <h4>Kartöflur</h4>
+                </div>
+                <div class="food-type"></div>
             </div>
         </div>
         <hr>
@@ -96,6 +100,7 @@
                     <a th:href="@{uppskriftir/sosur}"><img src="https://food-images.files.bbci.co.uk/food/recipes/easy_chocolate_cake_31070_16x9.jpg" alt="kdkd" /></a>
                     <h4>Kökur</h4>
                 </div>
+                <div class="food-type"></div>
             </div>
         </div>
     </menu>

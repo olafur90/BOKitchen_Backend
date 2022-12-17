@@ -17,6 +17,8 @@ import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 /***************************************************************************
  *  Nafn     : Ólafur Pálsson
  *  T-póstur : olp10@hi.is
@@ -50,7 +52,8 @@ public class NavController {
     }
 
     @RequestMapping(value = "uppskriftir/{foodtype}", method = RequestMethod.GET)
-    public String goToFoodType(@PathVariable("foodtype") String foodType, Model model) {
+    public String goToFoodType(@PathVariable("foodtype") String foodType, Model model, HttpSession session) {
+        session.getAttribute("userLoggedIn");
         // CreateDummyData();
         model.addAttribute("foodtype", foodType);
         List<Recipe> recipes = recipeService.findRecipesByFoodType(foodType);
@@ -59,7 +62,8 @@ public class NavController {
     }
 
     @RequestMapping(value = "newRecipe", method = RequestMethod.GET)
-    public String createNewRecipe() {
+    public String createNewRecipe(Model model) {
+        model.addAttribute("recipe", new Recipe());
         return "newRecipe";
     }
 

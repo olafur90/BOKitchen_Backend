@@ -11,8 +11,9 @@ public class Ingredient {
 
     private long ID;
     private String ingredientName;
-    private String imageUrl;
     private Recipe recipe;
+    private int cost;
+    private String amount;
 
     @Id
     @Column(name = "IngredientId")
@@ -21,10 +22,16 @@ public class Ingredient {
         return ID;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Recipe getRecipe() { return recipe; }
 
     public void setRecipe(Recipe recipe) { this.recipe = recipe; }
+
+    public void setCost(int cost) { this.cost = cost; }
+    public int getCost() { return cost; }
+
+    public void setAmount(String amount) { this.amount = amount; }
+    public String getAmount() { return amount; }
 
     public void setID(long ID) {
         this.ID = ID;
@@ -36,14 +43,6 @@ public class Ingredient {
 
     public void setIngredientName(String ingredientName) {
         this.ingredientName = ingredientName;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public Ingredient(String ingredientName, Recipe recipe) {
