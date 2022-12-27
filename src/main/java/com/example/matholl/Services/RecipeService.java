@@ -1,7 +1,6 @@
 package com.example.matholl.Services;
 
 import com.example.matholl.Persistence.Entities.FoodType;
-import com.example.matholl.Persistence.Entities.Ingredient;
 import com.example.matholl.Persistence.Entities.Recipe;
 
 import java.util.List;

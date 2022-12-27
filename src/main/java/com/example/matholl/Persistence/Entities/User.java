@@ -2,17 +2,7 @@ package com.example.matholl.Persistence.Entities;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
-/***************************************************************************
- *  Nafn     : Ólafur Pálsson
- *  T-póstur : olp10@hi.is
- *
- *  Lýsing   :
- *
- *
- ****************************************************************************/
 
 @Entity
 @Table(name = "users")

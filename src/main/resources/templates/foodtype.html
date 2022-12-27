@@ -44,7 +44,7 @@
                         <p th:text="${#strings.substring(recipe.shortDescription, 0, 250)} + '...'" th:if="${#strings.length(recipe.shortDescription) > 250}"></p>
                         <p th:text="${recipe.shortDescription}" th:if="${#strings.length(recipe.shortDescription) <= 250}"></p>
                     </div>
-
+                    
                     <div>
                         <p style="margin-top:3rem;" th:text="'Tími: ' + ${recipe.timeToCook}"></p>
                         <p th:text="'Fyrir : ' + ${recipe.forNumberOfPeople}"></p>

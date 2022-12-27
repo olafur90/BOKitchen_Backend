@@ -2,7 +2,6 @@ package com.example.matholl.Services.Implementation;
 
 
 import com.example.matholl.Persistence.Entities.Ingredient;
-import com.example.matholl.Persistence.Entities.Recipe;
 import com.example.matholl.Persistence.Repositories.IngredientRepository;
 import com.example.matholl.Services.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,8 +3,6 @@ package com.example.matholl.Persistence.Entities;
 import javax.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "recipes")
@@ -20,7 +18,7 @@ public class Recipe {
     private String foodType;
     private String imageLink;
     private User user;
-    private List<String> foodTypes;
+    // private List<String> foodTypes;
     // private List<Ingredient> ingredients;
 
 
