@@ -1,18 +1,13 @@
-package com.example.matholl.Persistence.Entities;
+/***************************************************************************
+ * Comment.java -- This file is part of matholl
+ * Copyright (c) Ólafur Pálsson 2023. All rights reserved.
+ ****************************************************************************/
 
+package com.example.matholl.Persistence.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-/***************************************************************************
- *  Nafn     : Ólafur Pálsson
- *  T-póstur : olp10@hi.is
- *
- *  Lýsing   :
- *
- *
- ****************************************************************************/
 
 @Entity
 @Table(name = "comments")
@@ -22,7 +17,6 @@ public class Comment {
     private String commentBody;
     private long recipeID;
     private LocalDate dateCreated;
-
 
     @Id
     @Column(name = "CommentId")

@@ -1,7 +1,6 @@
 package com.example.matholl.Services.Implementation;
 
-
-import com.example.matholl.Persistence.Entities.FoodType;
+import com.example.matholl.Persistence.Entities.Category;
 import com.example.matholl.Persistence.Entities.Recipe;
 import com.example.matholl.Persistence.Repositories.RecipeRepository;
 import com.example.matholl.Services.RecipeService;
@@ -10,27 +9,42 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * The recipe service implementation
+ */
 @Service
 public class RecipeServiceImplementation implements RecipeService {
 
+    /**
+     * The recipe repository
+     */
     private RecipeRepository recipeRepository;
 
+    /**
+     * The recipe service implementation constructor
+     * @param recipeRepository The recipe repository
+     */
     @Autowired
     public RecipeServiceImplementation(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
 
+    /**
+     * Find a food category
+     * @param name The name of the food category
+     * @return A food category
+     */
     @Override
-    public FoodType findFoodTypeByName(String name) {
-        return recipeRepository.findFoodTypeByName(name);
+    public Category findFoodTypeByName(String name) {
+        return recipeRepository.findCategoryByName(name);
     }
 
     @Override
     public List<Recipe> findAll() { return recipeRepository.findAll(); }
 
     @Override
-    public List<Recipe> findRecipesByFoodType(String foodType) {
-        return recipeRepository.findRecipesByFoodType(foodType);
+    public List<Recipe> findRecipesByCategories(String foodType) {
+        return recipeRepository.findRecipesByCategories(foodType);
     }
 
     @Override

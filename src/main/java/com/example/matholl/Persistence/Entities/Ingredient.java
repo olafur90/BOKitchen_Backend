@@ -3,7 +3,7 @@ package com.example.matholl.Persistence.Entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ingredient")
+@Table(name = "ingredients")
 public class Ingredient {
 
     private long ID;
