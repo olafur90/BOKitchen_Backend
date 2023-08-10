@@ -1,0 +1,61 @@
+/*  Class styles for     */
+.newCourseRadioButtons {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 100%; }
+
+.newCourseRadioButtons input {
+  margin-right: .3rem;
+  border: 1px solid black; }
+
+.newCourseRadioButtons textarea {
+  margin-right: .3rem; }
+
+.newRecipeHeader {
+  width: 30%;
+  margin: auto;
+  margin-top: 2rem;
+  color: #777777; }
+
+.newRecipeForm {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 1rem;
+  padding: auto;
+  text-align: left;
+  width: 30%; }
+  .newRecipeForm legend {
+    font-size: 2rem;
+    font-family: 'Gotu';
+    margin: 0;
+    margin-left: .5rem;
+    text-align: left; }
+  .newRecipeForm input {
+    height: 2rem;
+    text-align: left;
+    padding: auto 0;
+    padding-left: .7rem; }
+  .newRecipeForm textarea {
+    margin-top: .5rem;
+    padding: .3rem 0 1rem .7rem;
+    text-align: left;
+    width: 100%; }
+  .newRecipeForm .submitRecipe {
+    border: none;
+    text-align: center;
+    background-color: #3b54a5;
+    color: white;
+    width: 10rem; }
+    .newRecipeForm .submitRecipe:hover {
+      background-color: #526cc1; }
+  .newRecipeForm select {
+    height: 2rem;
+    margin: .5rem 0;
+    width: 20%; }
+
+.newRecipeSubmitButton {
+  height: 2rem;
+  width: 60%;
+  margin: 1rem auto; }

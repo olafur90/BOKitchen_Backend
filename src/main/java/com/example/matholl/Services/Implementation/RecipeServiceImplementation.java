@@ -39,6 +39,10 @@ public class RecipeServiceImplementation implements RecipeService {
         return recipeRepository.findCategoryByName(name);
     }
 
+    public List<Recipe> searchRecipes(String query) {
+        return recipeRepository.searchRecipes(query);
+    }
+
     @Override
     public List<Recipe> findAll() { return recipeRepository.findAll(); }
 

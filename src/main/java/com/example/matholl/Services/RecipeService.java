@@ -14,4 +14,6 @@ public interface RecipeService {
     public Recipe save(Recipe recipe);
     public List<Recipe> save(List<Recipe> recipes);
     public void delete(Recipe recipe);
+
+    public List<Recipe> searchRecipes(String query);
 }

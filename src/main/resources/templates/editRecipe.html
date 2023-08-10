@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/hamburgerMenu.css}" />
+    <title>Breyta uppskrift - Bóla Mathöll</title>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="container nav-container">
+                <input class="checkbox" type="checkbox" name="" id="" />
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>
+                <div class="logo">
+                    <h1>Bóla Mathöll</h1>
+                </div>
+                <div class="menu-items">
+                    <li><a th:href="@{/}">Forsíða</a></li>
+                    <li><a th:href="@{uppskriftir/kjuklingur}">Kjúklingur</a></li>
+                    <li><a th:href="@{uppskriftir/pasta}">Pasta</a></li>
+                    <li><a th:href="@{uppskriftir/hakk}">Hakk</a></li>
+                    <li><a th:href="@{uppskriftir/supur}">Súpur</a></li>
+                    <li><a th:href="@{uppskriftir/fiskur}">Fiskur</a></li>
+                    <li><a th:href="@{uppskriftir/kjot}">Kjöt</a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+<main>
+    <div class="newRecipeHeader">
+        <h2>Breyta uppskrift</h2>
+        <hr>
+    </div>
+    <form class="newRecipeForm" method="post" th:action="${editRecipe}" th:object="${recipe}">
+
+        <input placeholder="Nafn uppskriftar" th:field="*{name}" th:value="${recipe.name}" type="text" id="name" name="name" class="roundedBorder" />
+
+        <input placeholder="Fjöldi manns" th:field="*{forNumberOfPeople}" th:value="${recipe.forNumberOfPeople}" type="text" id="numberofpeople" name="numberofpeople" class="roundedBorder" />
+
+        <input placeholder="Heildartími" th:field="*{timeToCook}" th:value="${recipe.timeToCook}" type="text" id="timetocook" name="timetocook" class="roundedBorder" />
+        
+        <textarea placeholder="Skrifaðu stutta lýsingu hér" th:field="*{shortDescription}" th:text="${recipe.shortDescription}" rows="5" id="description" name="description" class="roundedBorder"></textarea>
+        
+        <textarea placeholder="Skrifaðu lengri lýsingu hér með leiðbeiningum" th:field="*{description}" th:text="${recipe.description}" rows="10" id="longDescription" name="longDescription" class="roundedBorder"></textarea>
+        
+        <!-- Radio buttons til að velja matarflokk. Má bæta seinna með lausn til að velja fleiri en einn flokk -->
+        <select th:field="*{foodType}" name="food">
+            <option style="text-align: center; font-size: 1.1rem;" disabled selected value="">Aðalréttir</option>
+            <option value="kjot">
+                Kjöt
+            </option>
+            <option value="hakk">
+                Hakk
+            </option>
+            <option value="pasta">
+                Pasta
+            </option>
+            <option value="kjuklingur">
+                Kjúklingur
+            </option>
+            <option value="fiskur">
+                Fiskur
+            </option>
+            <option value="supur">
+                Súpur
+            </option>
+            <option disabled value=""></option>
+            <option style="font-size: 1.1rem;" disabled value="">Meðlæti</option>
+            <option value="sosur">
+                Sósur
+            </option>
+            <option value="kartoflur">
+                Kartöflur
+            </option>
+            <option disabled value=""></option>
+            <option style="font-size: 1.1rem;" disabled value="">Annað</option>
+            <option value="braudrettir">
+                Brauðréttir
+            </option>
+            <option value="kökur">
+                Kökur
+            </option>
+            <option value="annad">
+                Annað
+            </option>
+        </select>
+        
+
+        <input placeholder="Hlekkur á mynd" th:field="*{imageLink}" th:value="${recipe.imageLink}" type="url" class="roundedBorder" id="imageUrl" name="imageUrl"/>
+    
+        <!-- Submit -->
+        <input type="submit" class="submitRecipe" value="Staðfesta" />
+    </form>
+</main>
+
+<footer>
+</footer>
+</body>

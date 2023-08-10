@@ -1,0 +1,245 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+option {
+  text-align: center; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6f6; }
+
+a {
+  text-decoration: none; }
+
+table {
+  border: 1px solid black;
+  margin: auto; }
+
+input {
+  margin-bottom: .7rem; }
+
+main {
+  display: flex;
+  flex-direction: column; }
+
+button {
+  width: 100px;
+  height: 30px;
+  margin: 0 auto; }
+
+header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #809CFF;
+  text-align: center;
+  padding: auto 0; }
+
+header h1 {
+  font-family: "Gotu";
+  color: #FFFFFF;
+  margin: .5em 0;
+  font-weight: 100; }
+
+footer {
+  display: flex;
+  width: 100%;
+  background-color: #809CFF;
+  height: 10vh; }
+
+menu {
+  min-height: 100vh; }
+  menu hr {
+    width: 30%;
+    margin: auto; }
+
+.courseTypesMenu {
+  background-color: inherit;
+  display: flex;
+  flex-direction: column;
+  font-weight: 100;
+  margin: 2rem auto;
+  text-align: center;
+  width: 60%; }
+  .courseTypesMenu img {
+    width: 6rem;
+    height: 6rem;
+    max-height: 7rem;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px 0 #3c3c3c; }
+
+.courseTypes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 7rem;
+  margin-top: 2rem; }
+
+.food-type {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%; }
+  .food-type img {
+    transition: transform .4s;
+    border-radius: 50%; }
+  .food-type img:hover {
+    transform: scale(1.1); }
+  .food-type a:hover {
+    color: red; }
+
+.courses {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: stretch;
+  width: 60%;
+  margin: auto;
+  margin-top: 2rem; }
+
+.courseItem {
+  margin: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  border: 2px solid #473c61;
+  border-radius: 5px;
+  box-shadow: 5px 2px 5px 0 #3c3c3c; }
+  .courseItem img {
+    border-radius: 50%;
+    max-height: 200px;
+    aspect-ratio: 1 / 1;
+    margin: auto 0;
+    margin-right: 2rem;
+    box-shadow: 0 0 5px 2px #3c3c3c; }
+
+.courseInfo {
+  justify-content: space-between; }
+  .courseInfo a {
+    font-size: 1.5rem;
+    color: #385c3d;
+    font-weight: bold; }
+  .courseInfo p {
+    margin-top: .5rem; }
+
+.course {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 1rem 0;
+  margin: 2rem auto;
+  box-shadow: 0 0 5px 2px #898989; }
+  .course hr {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 2rem; }
+  .course h3 {
+    font-weight: normal;
+    font-size: 2rem;
+    margin-bottom: .4rem; }
+  .course p {
+    font-size: 1.2rem; }
+
+.courseHeader {
+  display: flex;
+  justify-content: space-between; }
+  .courseHeader img {
+    border: 1px solid transparent;
+    border-radius: 50%;
+    max-height: 250px;
+    aspect-ratio: 1 / 1;
+    margin: 10px 0;
+    margin-right: 10px; }
+
+.courseBody {
+  width: 80%;
+  margin: auto;
+  padding-bottom: 1rem; }
+
+.courseInfo, .recipeInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  width: 60%; }
+
+.recipeInfo {
+  padding-top: 1rem;
+  margin: 0 auto; }
+  .recipeInfo ul {
+    margin-top: 2rem;
+    list-style-type: none;
+    text-align: left; }
+  .recipeInfo ul li {
+    margin: .4rem 0; }
+
+/*  Class styles for     */
+.newCourseRadioButtons {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 100%; }
+
+.newCourseRadioButtons input {
+  margin-right: .3rem;
+  border: 1px solid black; }
+
+.newCourseRadioButtons textarea {
+  margin-right: .3rem; }
+
+.newRecipeHeader {
+  width: 30%;
+  margin: auto;
+  margin-top: 2rem;
+  color: #777777; }
+
+.newRecipeForm {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 1rem;
+  padding: auto;
+  text-align: left;
+  width: 30%; }
+  .newRecipeForm legend {
+    font-size: 2rem;
+    font-family: 'Gotu';
+    margin: 0;
+    margin-left: .5rem;
+    text-align: left; }
+  .newRecipeForm input {
+    height: 2rem;
+    text-align: left;
+    padding: auto 0;
+    padding-left: .7rem; }
+  .newRecipeForm textarea {
+    margin-top: .5rem;
+    padding: .3rem 0 1rem .7rem;
+    text-align: left;
+    width: 100%; }
+  .newRecipeForm .submitRecipe {
+    border: none;
+    text-align: center;
+    background-color: #3b54a5;
+    color: white;
+    width: 10rem; }
+    .newRecipeForm .submitRecipe:hover {
+      background-color: #526cc1; }
+  .newRecipeForm select {
+    height: 2rem;
+    margin: .5rem 0;
+    width: 20%; }
+
+.newRecipeSubmitButton {
+  height: 2rem;
+  width: 60%;
+  margin: 1rem auto; }
+
+@font-face {
+  font-family: Gotu;
+  src: url("fonts/Gotu/Gotu-Regular.ttf"); }

@@ -57,16 +57,56 @@ public class RecipeController {
         return recipes;
     }
 
+    @GetMapping(value = "/uppskriftir/search")
+    public List<Recipe> searchRecipes(@RequestParam String query) {
+        List<Recipe> recipes = recipeService.searchRecipes(query);
+        if (recipes.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return recipes;
+    }
+
+    @GetMapping(value = "/uppskriftir/{recipeId}")
+    public Recipe getRecipeByID(@PathVariable("recipeId") String id) {
+        Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
+        return recipe;
+    }
+
+    /**
+     * Gets a list of recent recipes from the server
+     * @return A list of recipes
+     */
+    @GetMapping(value = "/uppskriftir/recentRecipes")
+    public List<Recipe> getRecentRecipes(){
+        int numberOfRecents = 6;
+        List<Recipe> recipes = recipeService.findAll();
+        recipes.sort((recipe1, recipe2) -> recipe2.getDateAdded().compareTo(recipe1.getDateAdded()));
+        return recipes.subList(0, numberOfRecents);
+    }
+
+    /**
+     * Gets the latest recipe from the server
+     * @return A recipe object
+     */
+    @GetMapping(value = "/uppskriftir/latestRecipe")
+    public Recipe getLatestRecipe(){
+        int numberOfRecents = 1;
+        List<Recipe> recipes = recipeService.findAll();
+        recipes.sort((recipe1, recipe2) -> recipe2.getDateAdded().compareTo(recipe1.getDateAdded()));
+        return recipes.get(0);
+    }
+
     /**
      * Gets a list of all recipes given a food category
      * @param foodCategory The food category to get recipes for
      * @return A list of recipes
      */
+    /*
     @GetMapping(value = "uppskriftir/{foodtype}")
     public List<Recipe> goToFoodType(@PathVariable("foodtype") String foodCategory) {
         List<Recipe> recipes = recipeService.findRecipesByCategories(foodCategory);
         return recipes;
-    }
+    }*/
 
     /**
      * Gets all ingredients for a recipe
@@ -95,13 +135,11 @@ public class RecipeController {
 
         return HttpStatus.METHOD_NOT_ALLOWED;
     }
-
     @PostMapping(value = "/addDummyData")
     public HttpStatus dummyData(){
         addDummyData();
         return HttpStatus.OK;
     }
-
     private void addDummyData() {
         Category category = new Category("Food", null, "Matur");
         List<Category> cat = new ArrayList<>();
