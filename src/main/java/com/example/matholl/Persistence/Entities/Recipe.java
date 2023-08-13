@@ -68,8 +68,7 @@ public class Recipe {
 
     private Difficulty difficulty;
 
-    @JsonManagedReference
-    private List<Category> categories;
+    private List<RecipeCategoryLink> recipeCategoryLinks = new ArrayList<>();
 
     /**
      * The constructor
@@ -87,7 +86,6 @@ public class Recipe {
         this.timeToCookInMinutes = timeToCookInMinutes;
         this.forNumberOfPeople = forNumberOfPeople;
         this.dateAdded = LocalDateTime.now();
-        this.categories = new ArrayList<>();
         this.difficulty = Difficulty.EASY;
     }
 
@@ -133,7 +131,6 @@ public class Recipe {
      * A required empty constructor
      */
     public Recipe() {
-        this.categories = new ArrayList<>();
         this.difficulty = Difficulty.EASY;
         this.dateAdded = LocalDateTime.now();
     }
@@ -170,17 +167,10 @@ public class Recipe {
 
     public void setID(long ID) { this.ID = ID; }
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
     public void addCategory(Category category) {
-        this.categories.add(category);
+        RecipeCategoryLink link = new RecipeCategoryLink(this, category);
+        recipeCategoryLinks.add(link);
+        category.getRecipeCategoryLinks().add(link);
     }
 
     public Difficulty getDifficulty() {
@@ -190,4 +180,14 @@ public class Recipe {
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
+
+    @OneToMany(mappedBy = "recipe")
+    public List<RecipeCategoryLink> getRecipeCategoryLinks() {
+        return recipeCategoryLinks;
+    }
+
+    public void setRecipeCategoryLinks(List<RecipeCategoryLink> recipeCategoryLinks) {
+        this.recipeCategoryLinks = recipeCategoryLinks;
+    }
+
 }

@@ -45,7 +45,7 @@ public class RecipeController {
      */
     @PostMapping(value = "/add")
     public Recipe creteNewRecipe(@RequestBody Recipe recipe) {
-        System.out.println(recipe.getName());
+        recipe.addCategory(new Category("Testing", "Bleh", "Kjöt"));
         if (recipeService.save(recipe) != null) {
             return recipe;
         }
@@ -143,10 +143,6 @@ public class RecipeController {
         return HttpStatus.OK;
     }
     private void addDummyData() {
-        Category category = new Category("Food", null, "Matur");
-        List<Category> cat = new ArrayList<>();
-        cat.add(category);
-
         for (int i = 0; i < 20; i++) {
             Recipe recipe = new Recipe();
             recipe.setName("Recipe" + i);
@@ -155,7 +151,6 @@ public class RecipeController {
             recipe.setTimeToCookInMinutes(10);
             recipe.setForNumberOfPeople(i);
             recipe.setDateAdded(LocalDateTime.now());
-            recipe.setCategories(cat);
 
             Recipe returnRecipe = recipeService.save(recipe);
         }

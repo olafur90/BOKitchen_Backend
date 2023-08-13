@@ -3,6 +3,7 @@ package com.example.matholl.Persistence.Entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,10 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "categories")
 public class Category {
-    /**
-     * The primary key
-     */
-    private long ID;
+    private Long ID;
 
     /**
      * The image URI
@@ -31,8 +29,7 @@ public class Category {
      */
     private String IcelandicName;
 
-    @JsonBackReference
-    private Recipe recipe;
+    private List<RecipeCategoryLink> recipeCategoryLinks = new ArrayList<>();
 
     /**
      * A required empty constructor
@@ -59,12 +56,6 @@ public class Category {
         this.IcelandicName = icelandicName;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getID() {
-        return ID;
-    }
-
     @Lob
     public String getImageUri() {
         return ImageUri;
@@ -72,10 +63,6 @@ public class Category {
 
     public void setImageUri(String imageUri) {
         this.ImageUri = imageUri;
-    }
-
-    public void setID(long ID) {
-        this.ID = ID;
     }
 
     public String getName() {
@@ -86,12 +73,22 @@ public class Category {
         this.Name = name;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    public Recipe getRecipe() {
-        return recipe;
+    @OneToMany(mappedBy = "category")
+    public List<RecipeCategoryLink> getRecipeCategoryLinks() {
+        return recipeCategoryLinks;
     }
 
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    public void setRecipeCategoryLinks(List<RecipeCategoryLink> recipeCategoryLinks) {
+        this.recipeCategoryLinks = recipeCategoryLinks;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
     }
 }

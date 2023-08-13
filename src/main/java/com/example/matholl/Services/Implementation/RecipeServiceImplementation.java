@@ -48,7 +48,7 @@ public class RecipeServiceImplementation implements RecipeService {
 
     @Override
     public List<Recipe> findRecipesByCategories(String foodType) {
-        return recipeRepository.findRecipesByCategories(foodType);
+        return recipeRepository.findRecipesByRecipeCategoryLinks(foodType);
     }
 
     @Override
