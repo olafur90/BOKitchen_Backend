@@ -21,6 +21,7 @@ import java.util.List;
  * The controller for the recipe API
  */
 @RestController
+@RequestMapping("uppskriftir")
 @CrossOrigin(origins = "http://localhost:4200")
 public class RecipeController {
     RecipeService recipeService;
@@ -42,22 +43,23 @@ public class RecipeController {
      * @param recipe The recipe to create
      * @return 201 if recipe is successfully created, 405 Method Not Allowed otherwise
      */
-    @PostMapping(value = "/newRecipe")
-    public HttpStatus creteNewRecipe(Recipe recipe) {
+    @PostMapping(value = "/add")
+    public Recipe creteNewRecipe(@RequestBody Recipe recipe) {
+        System.out.println(recipe.getName());
         if (recipeService.save(recipe) != null) {
-            return HttpStatus.CREATED;
+            return recipe;
         }
 
-        return HttpStatus.METHOD_NOT_ALLOWED;
+        return null;
     }
 
-    @GetMapping(value = "/uppskriftir")
+    @GetMapping(value = "/")
     public List<Recipe> getAllRecipes() {
         List<Recipe> recipes = recipeService.findAll();
         return recipes;
     }
 
-    @GetMapping(value = "/uppskriftir/search")
+    @GetMapping(value = "/search")
     public List<Recipe> searchRecipes(@RequestParam String query) {
         List<Recipe> recipes = recipeService.searchRecipes(query);
         if (recipes.isEmpty()) {
@@ -66,7 +68,7 @@ public class RecipeController {
         return recipes;
     }
 
-    @GetMapping(value = "/uppskriftir/{recipeId}")
+    @GetMapping(value = "/recipe/{recipeId}")
     public Recipe getRecipeByID(@PathVariable("recipeId") String id) {
         Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
         return recipe;
@@ -76,7 +78,7 @@ public class RecipeController {
      * Gets a list of recent recipes from the server
      * @return A list of recipes
      */
-    @GetMapping(value = "/uppskriftir/recentRecipes")
+    @GetMapping(value = "/recentRecipes")
     public List<Recipe> getRecentRecipes(){
         int numberOfRecents = 6;
         List<Recipe> recipes = recipeService.findAll();
@@ -88,7 +90,7 @@ public class RecipeController {
      * Gets the latest recipe from the server
      * @return A recipe object
      */
-    @GetMapping(value = "/uppskriftir/latestRecipe")
+    @GetMapping(value = "/latestRecipe")
     public Recipe getLatestRecipe(){
         int numberOfRecents = 1;
         List<Recipe> recipes = recipeService.findAll();
@@ -113,7 +115,7 @@ public class RecipeController {
      * @param id The id of the recipe
      * @return A list of ingredients
      */
-    @GetMapping(value = "/uppskriftir/{foodtype}/{id}/ingredients")
+    @GetMapping(value = "/{foodtype}/{id}/ingredients")
     public List<Ingredient> getRecipeIngredients(@PathVariable("id") String id) {
         Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
         List<Ingredient> ingredients = ingredientService.findIngredientsByRecipeId(recipe.getID());
@@ -126,7 +128,7 @@ public class RecipeController {
      * @param id The id of the recipe
      * @return 200 if recipe is successfully edited, 405 Method Not Allowed otherwise
      */
-    @PostMapping(value = "/uppskriftir/{foodtype}/{id}/editRecipe")
+    @PostMapping(value = "/{foodtype}/{id}/editRecipe")
     public HttpStatus editRecipe(Recipe recipe, @PathVariable("id") String id) {
         recipe.setID(Long.parseLong(id));
         if (recipeService.save(recipe) != null) {

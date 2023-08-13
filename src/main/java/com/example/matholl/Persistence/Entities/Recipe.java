@@ -75,18 +75,20 @@ public class Recipe {
      * The constructor
      * @param instructions The instructions for the recipe
      * @param name The name of the recipe
-     * @param shortDescription A short description for the recipe
+     * @param summary A short description for the recipe
      * @param timeToCookInMinutes The average time of cooking the recipe in minutes
      * @param forNumberOfPeople The number of people the recipe is suggested for
      */
-    public Recipe(String instructions, String name, String shortDescription, int timeToCookInMinutes, int forNumberOfPeople) {
+    public Recipe(String instructions, String name, String summary, int timeToCookInMinutes, int forNumberOfPeople) {
         this.name = name;
         this.baseImage = "";
         this.instructions = instructions;
-        this.shortDescription = shortDescription;
+        this.shortDescription = summary;
         this.timeToCookInMinutes = timeToCookInMinutes;
         this.forNumberOfPeople = forNumberOfPeople;
         this.dateAdded = LocalDateTime.now();
+        this.categories = new ArrayList<>();
+        this.difficulty = Difficulty.EASY;
     }
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -133,6 +135,7 @@ public class Recipe {
     public Recipe() {
         this.categories = new ArrayList<>();
         this.difficulty = Difficulty.EASY;
+        this.dateAdded = LocalDateTime.now();
     }
 
     public LocalDateTime getDateAdded() { return dateAdded; }
@@ -178,5 +181,13 @@ public class Recipe {
 
     public void addCategory(Category category) {
         this.categories.add(category);
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 }
