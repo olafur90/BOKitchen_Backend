@@ -77,10 +77,21 @@ public class RecipeController {
      */
     @GetMapping(value = "/recentRecipes")
     public List<Recipe> getRecentRecipes(){
-        int numberOfRecents = 6;
         List<Recipe> recipes = recipeService.findAll();
+
+        int maxNumberOfRecents = 6;
+        int totalNumberOfRecipes = recipes.size();
+
+        if (totalNumberOfRecipes == 0) {
+            return null;
+        }
+
+        else if (totalNumberOfRecipes < maxNumberOfRecents) {
+            return recipes;
+        }
+
         recipes.sort((recipe1, recipe2) -> recipe2.getDateAdded().compareTo(recipe1.getDateAdded()));
-        return recipes.subList(0, numberOfRecents);
+        return recipes.subList(0, maxNumberOfRecents);
     }
 
     /**
@@ -89,8 +100,12 @@ public class RecipeController {
      */
     @GetMapping(value = "/latestRecipe")
     public Recipe getLatestRecipe(){
-        int numberOfRecents = 1;
         List<Recipe> recipes = recipeService.findAll();
+
+        if (recipes == null || recipes.size() == 0) {
+            return null;
+        }
+
         recipes.sort((recipe1, recipe2) -> recipe2.getDateAdded().compareTo(recipe1.getDateAdded()));
         return recipes.get(0);
     }
