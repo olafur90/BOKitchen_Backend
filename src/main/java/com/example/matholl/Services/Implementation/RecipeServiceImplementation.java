@@ -1,6 +1,5 @@
 package com.example.matholl.Services.Implementation;
 
-import com.example.matholl.Persistence.Entities.Category;
 import com.example.matholl.Persistence.Entities.Recipe;
 import com.example.matholl.Persistence.Repositories.RecipeRepository;
 import com.example.matholl.Services.RecipeService;
@@ -29,16 +28,6 @@ public class RecipeServiceImplementation implements RecipeService {
         this.recipeRepository = recipeRepository;
     }
 
-    /**
-     * Find a food category
-     * @param name The name of the food category
-     * @return A food category
-     */
-    @Override
-    public Category findFoodTypeByName(String name) {
-        return recipeRepository.findCategoryByName(name);
-    }
-
     public List<Recipe> searchRecipes(String query) {
         return recipeRepository.searchRecipes(query);
     }
@@ -47,8 +36,8 @@ public class RecipeServiceImplementation implements RecipeService {
     public List<Recipe> findAll() { return recipeRepository.findAll(); }
 
     @Override
-    public List<Recipe> findRecipesByCategories(String foodType) {
-        return recipeRepository.findRecipesByRecipeCategoryLinks(foodType);
+    public List<Recipe> findRecipesByCategory(String foodType) {
+        return recipeRepository.findRecipesByCategory(foodType);
     }
 
     @Override

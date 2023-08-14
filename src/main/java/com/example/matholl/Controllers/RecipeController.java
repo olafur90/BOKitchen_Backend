@@ -4,7 +4,6 @@
  ****************************************************************************/
 
 package com.example.matholl.Controllers;
-import com.example.matholl.Persistence.Entities.Category;
 import com.example.matholl.Persistence.Entities.Ingredient;
 import com.example.matholl.Persistence.Entities.Recipe;
 import com.example.matholl.Services.IngredientService;
@@ -24,8 +23,8 @@ import java.util.List;
 @RequestMapping("uppskriftir")
 @CrossOrigin(origins = "http://localhost:4200")
 public class RecipeController {
-    RecipeService recipeService;
-    IngredientService ingredientService;
+    private RecipeService recipeService;
+    private IngredientService ingredientService;
 
     /**
      * The constructor
@@ -45,11 +44,9 @@ public class RecipeController {
      */
     @PostMapping(value = "/add")
     public Recipe creteNewRecipe(@RequestBody Recipe recipe) {
-        recipe.addCategory(new Category("Testing", "Bleh", "Kjöt"));
         if (recipeService.save(recipe) != null) {
             return recipe;
         }
-
         return null;
     }
 
@@ -99,30 +96,6 @@ public class RecipeController {
     }
 
     /**
-     * Gets a list of all recipes given a food category
-     * @param foodCategory The food category to get recipes for
-     * @return A list of recipes
-     */
-    /*
-    @GetMapping(value = "uppskriftir/{foodtype}")
-    public List<Recipe> goToFoodType(@PathVariable("foodtype") String foodCategory) {
-        List<Recipe> recipes = recipeService.findRecipesByCategories(foodCategory);
-        return recipes;
-    }*/
-
-    /**
-     * Gets all ingredients for a recipe
-     * @param id The id of the recipe
-     * @return A list of ingredients
-     */
-    @GetMapping(value = "/{foodtype}/{id}/ingredients")
-    public List<Ingredient> getRecipeIngredients(@PathVariable("id") String id) {
-        Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
-        List<Ingredient> ingredients = ingredientService.findIngredientsByRecipeId(recipe.getID());
-        return ingredients;
-    }
-
-    /**
      * Edits a recipe
      * @param recipe The recipe to edit
      * @param id The id of the recipe
@@ -137,22 +110,22 @@ public class RecipeController {
 
         return HttpStatus.METHOD_NOT_ALLOWED;
     }
+
     @PostMapping(value = "/addDummyData")
     public HttpStatus dummyData(){
         addDummyData();
         return HttpStatus.OK;
     }
+
     private void addDummyData() {
         for (int i = 0; i < 20; i++) {
             Recipe recipe = new Recipe();
             recipe.setName("Recipe" + i);
-            recipe.setShortDescription("Short Description" + i);
-            recipe.setDescription("Description" + i);
             recipe.setTimeToCookInMinutes(10);
             recipe.setForNumberOfPeople(i);
             recipe.setDateAdded(LocalDateTime.now());
 
-            Recipe returnRecipe = recipeService.save(recipe);
+            recipeService.save(recipe);
         }
     }
 

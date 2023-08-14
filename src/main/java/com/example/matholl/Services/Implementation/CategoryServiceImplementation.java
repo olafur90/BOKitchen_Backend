@@ -1,6 +1,6 @@
 package com.example.matholl.Services.Implementation;
 
-import com.example.matholl.Persistence.Entities.Category;
+import com.example.matholl.Persistence.Entities.AvailableCategory;
 import com.example.matholl.Persistence.Repositories.CategoryRepository;
 import com.example.matholl.Services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,12 @@ public class CategoryServiceImplementation implements CategoryService {
         this.categoryRepository = categoryRepository;
     }
     @Override
-    public List<Category> findAll() {
+    public List<AvailableCategory> findAll() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public AvailableCategory save(AvailableCategory category) {
+        return categoryRepository.save(category);
     }
 }

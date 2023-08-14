@@ -5,14 +5,8 @@
 
 package com.example.matholl.Persistence.Entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
-
-import java.sql.Array;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Recipe model entity
@@ -32,16 +26,6 @@ public class Recipe {
     private String name;
 
     /**
-     * A short description for the recipe
-     */
-    private String shortDescription;
-
-    /**
-     * A longer description for the recipe
-     */
-    private String description;
-
-    /**
      * The average time of cooking the recipe in minutes
      */
     private int timeToCookInMinutes;
@@ -57,36 +41,47 @@ public class Recipe {
     private LocalDateTime dateAdded;
 
     /**
-     * The thumbnail image for the recipe
-     */
-    private String baseImage;
-
-    /**
      * The user who uploaded the recipe
      */
     private User user;
 
+    /**
+     * The difficulty of cooking
+     */
     private Difficulty difficulty;
 
-    private List<RecipeCategoryLink> recipeCategoryLinks = new ArrayList<>();
+    /**
+     * The category of the recipe
+     */
+    private String category;
+
+    /**
+     * The instructions for the recipe
+     */
+    private String instructions;
 
     /**
      * The constructor
      * @param instructions The instructions for the recipe
      * @param name The name of the recipe
-     * @param summary A short description for the recipe
      * @param timeToCookInMinutes The average time of cooking the recipe in minutes
      * @param forNumberOfPeople The number of people the recipe is suggested for
+     * @param category The category of the recipe
      */
-    public Recipe(String instructions, String name, String summary, int timeToCookInMinutes, int forNumberOfPeople) {
+    public Recipe(Difficulty difficulty, String instructions, String name, int timeToCookInMinutes, int forNumberOfPeople, String category) {
         this.name = name;
-        this.baseImage = "";
         this.instructions = instructions;
-        this.shortDescription = summary;
         this.timeToCookInMinutes = timeToCookInMinutes;
         this.forNumberOfPeople = forNumberOfPeople;
+        this.difficulty = difficulty;
+        this.category = category;
+    }
+
+    /**
+     * A required empty constructor
+     */
+    public Recipe() {
         this.dateAdded = LocalDateTime.now();
-        this.difficulty = Difficulty.EASY;
     }
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -103,36 +98,9 @@ public class Recipe {
         return instructions;
     }
 
+    @Lob
     public void setInstructions(String instructions) {
         this.instructions = instructions;
-    }
-
-    private String instructions;
-
-    @Lob
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Lob
-    public String getBaseImage() {
-        return baseImage;
-    }
-
-    public void setBaseImage(String baseImage) {
-        this.baseImage = baseImage;
-    }
-
-    /**
-     * A required empty constructor
-     */
-    public Recipe() {
-        this.difficulty = Difficulty.EASY;
-        this.dateAdded = LocalDateTime.now();
     }
 
     public LocalDateTime getDateAdded() { return dateAdded; }
@@ -143,18 +111,9 @@ public class Recipe {
 
     public void setForNumberOfPeople(int forNumberOfPeople) { this.forNumberOfPeople = forNumberOfPeople; }
 
-    //@OneToMany (mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    //public List<Ingredient> getIngredients() { return ingredients; }
-    //public void setIngredients(List<Ingredient> ingredients) { this.ingredients = ingredients; }
-
     public int getTimeToCookInMinutes() { return timeToCookInMinutes; }
 
     public void setTimeToCookInMinutes(int timeToCookInMinutes) { this.timeToCookInMinutes = timeToCookInMinutes; }
-
-    @Lob
-    public String getShortDescription() { return shortDescription; }
-
-    public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
 
     @Column(name = "name")
     public String getName() { return name; }
@@ -167,12 +126,6 @@ public class Recipe {
 
     public void setID(long ID) { this.ID = ID; }
 
-    public void addCategory(Category category) {
-        RecipeCategoryLink link = new RecipeCategoryLink(this, category);
-        recipeCategoryLinks.add(link);
-        category.getRecipeCategoryLinks().add(link);
-    }
-
     public Difficulty getDifficulty() {
         return difficulty;
     }
@@ -181,13 +134,11 @@ public class Recipe {
         this.difficulty = difficulty;
     }
 
-    @OneToMany(mappedBy = "recipe")
-    public List<RecipeCategoryLink> getRecipeCategoryLinks() {
-        return recipeCategoryLinks;
+    public String getCategory() {
+        return category;
     }
 
-    public void setRecipeCategoryLinks(List<RecipeCategoryLink> recipeCategoryLinks) {
-        this.recipeCategoryLinks = recipeCategoryLinks;
+    public void setCategory(String category) {
+        this.category = category;
     }
-
 }

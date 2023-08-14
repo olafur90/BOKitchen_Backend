@@ -1,13 +1,9 @@
 package com.example.matholl.Controllers;
 
-import com.example.matholl.Persistence.Entities.Category;
+import com.example.matholl.Persistence.Entities.AvailableCategory;
 import com.example.matholl.Services.CategoryService;
-import com.example.matholl.Services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +11,8 @@ import java.util.List;
 @RequestMapping("flokkar")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
+
+    // FIXME: categoryService currently using AvailableCategory class
     private CategoryService categoryService;
 
     @Autowired
@@ -23,7 +21,13 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/")
-    public List<Category> getAllCategories() {
+    public List<AvailableCategory> getAllCategories() {
         return categoryService.findAll();
+    }
+
+    // TODO: Add category with endpoint
+    @PostMapping(value = "/add")
+    public AvailableCategory createNewCategory(@RequestBody AvailableCategory category) {
+        return categoryService.save(category);
     }
 }
