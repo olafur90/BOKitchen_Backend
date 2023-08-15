@@ -26,4 +26,9 @@ public class CategoryServiceImplementation implements CategoryService {
     public AvailableCategory save(AvailableCategory category) {
         return categoryRepository.save(category);
     }
+
+    @Override
+    public AvailableCategory findByName(String name) {
+        return categoryRepository.findByName(name);
+    }
 }

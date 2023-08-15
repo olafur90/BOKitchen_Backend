@@ -13,7 +13,7 @@ import java.util.List;
 public class CategoryController {
 
     // FIXME: categoryService currently using AvailableCategory class
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @Autowired
     public CategoryController(CategoryService categoryService) {
@@ -25,7 +25,11 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
-    // TODO: Add category with endpoint
+    @GetMapping(value = "/{name}")
+    public AvailableCategory getCategoryByName(@PathVariable String name) {
+        return categoryService.findByName(name);
+    }
+
     @PostMapping(value = "/add")
     public AvailableCategory createNewCategory(@RequestBody AvailableCategory category) {
         return categoryService.save(category);

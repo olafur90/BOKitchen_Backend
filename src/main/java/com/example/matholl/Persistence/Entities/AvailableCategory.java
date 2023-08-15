@@ -10,6 +10,8 @@ public class AvailableCategory {
     private String name;
     private String icelandicName;
 
+    private String imagePath;
+
     public AvailableCategory() {
 
     }
@@ -43,5 +45,13 @@ public class AvailableCategory {
 
     public void setIcelandicName(String icelandicName) {
         this.icelandicName = icelandicName;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

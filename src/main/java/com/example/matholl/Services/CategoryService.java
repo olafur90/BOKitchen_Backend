@@ -7,4 +7,5 @@ import java.util.List;
 public interface CategoryService {
     public List<AvailableCategory> findAll();
     public AvailableCategory save(AvailableCategory category);
+    public AvailableCategory findByName(String name);
 }

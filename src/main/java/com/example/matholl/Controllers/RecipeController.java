@@ -40,14 +40,26 @@ public class RecipeController {
     /**
      * Creates a new recipe on the server
      * @param recipe The recipe to create
-     * @return 201 if recipe is successfully created, 405 Method Not Allowed otherwise
+     * @return CREATED if recipe is successfully created, BAD_REQUEST if not
      */
     @PostMapping(value = "/add")
-    public Recipe creteNewRecipe(@RequestBody Recipe recipe) {
-        if (recipeService.save(recipe) != null) {
-            return recipe;
+    public HttpStatus creteNewRecipe(@RequestBody Recipe recipe) {
+        if (
+                recipe.getName() == null ||
+                //recipe.getCategory() == null ||
+                recipe.getInstructions() == null ||
+                recipe.getForNumberOfPeople() == 0 ||
+                recipe.getTimeToCookInMinutes() == 0 ||
+                recipe.getDifficulty() == null
+        ) {
+            return HttpStatus.BAD_REQUEST;
         }
-        return null;
+
+        if (recipeService.save(recipe) != null) {
+            return HttpStatus.CREATED;
+        }
+
+        return HttpStatus.BAD_REQUEST;
     }
 
     @GetMapping(value = "/")
@@ -79,7 +91,7 @@ public class RecipeController {
     public List<Recipe> getRecentRecipes(){
         List<Recipe> recipes = recipeService.findAll();
 
-        int maxNumberOfRecents = 6;
+        int maxNumberOfRecents = 7;
         int totalNumberOfRecipes = recipes.size();
 
         if (totalNumberOfRecipes == 0) {

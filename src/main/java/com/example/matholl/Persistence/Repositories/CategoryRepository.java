@@ -9,4 +9,5 @@ public interface CategoryRepository extends JpaRepository<AvailableCategory, Lon
     public void delete (AvailableCategory category);
     public AvailableCategory save (AvailableCategory category);
     public List<AvailableCategory> findAll();
+    public AvailableCategory findByName(String name);
 }
