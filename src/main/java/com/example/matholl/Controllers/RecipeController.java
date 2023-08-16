@@ -77,6 +77,13 @@ public class RecipeController {
         return recipes;
     }
 
+    // Get all recipes by category
+    @GetMapping(value = "/flokkar/{category}")
+    public List<Recipe> getRecipesByCategory(@PathVariable("category") String category) {
+        List<Recipe> recipes = recipeService.findByCategory(category);
+        return recipes;
+    }
+
     @GetMapping(value = "/recipe/{recipeId}")
     public Recipe getRecipeByID(@PathVariable("recipeId") String id) {
         Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));

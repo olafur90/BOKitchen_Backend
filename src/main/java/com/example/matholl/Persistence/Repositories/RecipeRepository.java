@@ -10,7 +10,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     public void delete(Recipe recipe);
     public Recipe findByID(long id);
     public List<Recipe> findAll();
-    public List<Recipe> findRecipesByCategory(String foodType);
+    public List<Recipe> findByCategory(String foodType);
     public List<Recipe> save(List<Recipe> recipes);
 
     @Query("SELECT r FROM Recipe r WHERE " +

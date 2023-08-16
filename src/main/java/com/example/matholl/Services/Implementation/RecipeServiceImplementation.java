@@ -36,8 +36,8 @@ public class RecipeServiceImplementation implements RecipeService {
     public List<Recipe> findAll() { return recipeRepository.findAll(); }
 
     @Override
-    public List<Recipe> findRecipesByCategory(String foodType) {
-        return recipeRepository.findRecipesByCategory(foodType);
+    public List<Recipe> findByCategory(String foodType) {
+        return recipeRepository.findByCategory(foodType);
     }
 
     @Override

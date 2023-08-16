@@ -61,6 +61,11 @@ public class Recipe {
     private String instructions;
 
     /**
+     * The base image of the recipe
+     */
+    private String baseImage;
+
+    /**
      * The constructor
      * @param instructions The instructions for the recipe
      * @param name The name of the recipe
@@ -140,5 +145,13 @@ public class Recipe {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getBaseImage() {
+        return baseImage;
+    }
+
+    public void setBaseImage(String baseImage) {
+        this.baseImage = baseImage;
     }
 }

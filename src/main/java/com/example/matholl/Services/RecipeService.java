@@ -7,7 +7,7 @@ import java.util.List;
 public interface RecipeService {
     public List<Recipe> findAll();
     public Recipe findRecipeByID(long id);
-    public List<Recipe> findRecipesByCategory(String foodType);
+    public List<Recipe> findByCategory(String foodType);
     public List<Recipe> findRecipesWithTimeBetween(int minTime, int maxTime);
     public Recipe save(Recipe recipe);
     public List<Recipe> save(List<Recipe> recipes);
