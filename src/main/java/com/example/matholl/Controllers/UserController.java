@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
+// TODO: Remember CORS for localhost and live
 @Controller
 public class UserController {
     UserService userService;

@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("flokkar")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://mathollfrontend-production.up.railway.app/"})
 public class CategoryController {
 
     // FIXME: categoryService currently using AvailableCategory class
