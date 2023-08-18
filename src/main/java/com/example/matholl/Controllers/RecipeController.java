@@ -21,7 +21,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("uppskriftir")
-@CrossOrigin(origins = "http://localhost:4200")
+// Cross origins http://mathollbackend-production.up.railway.app and localhost:4200
+@CrossOrigin(origins = {"http://localhost:4200", "https://mathollfrontend-production.up.railway.app/"})
 public class RecipeController {
     private RecipeService recipeService;
     private IngredientService ingredientService;

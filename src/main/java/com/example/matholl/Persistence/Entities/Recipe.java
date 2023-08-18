@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "recipes")
-public class Recipe {
+public class Recipe implements Comparable<Recipe> {
 
     /**
      * The ID of the recipe
@@ -153,5 +153,11 @@ public class Recipe {
 
     public void setBaseImage(String baseImage) {
         this.baseImage = baseImage;
+    }
+
+    @Override
+    public int compareTo(Recipe o) {
+        // Compare by time
+        return this.getDateAdded().compareTo(o.getDateAdded());
     }
 }
