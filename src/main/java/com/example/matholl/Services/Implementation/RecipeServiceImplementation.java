@@ -28,6 +28,7 @@ public class RecipeServiceImplementation implements RecipeService {
         this.recipeRepository = recipeRepository;
     }
 
+    @Override
     public List<Recipe> searchRecipes(String query) {
         return recipeRepository.searchRecipes(query);
     }

@@ -4,6 +4,9 @@ import com.example.matholl.Persistence.Entities.Recipe;
 
 import java.util.List;
 
+/**
+ * The recipe service interface
+ */
 public interface RecipeService {
     public List<Recipe> findAll();
     public Recipe findRecipeByID(long id);
