@@ -4,8 +4,10 @@
  ****************************************************************************/
 
 package com.example.matholl.Controllers;
+import com.example.matholl.Persistence.Entities.Comment;
 import com.example.matholl.Persistence.Entities.Ingredient;
 import com.example.matholl.Persistence.Entities.Recipe;
+import com.example.matholl.Services.CommentService;
 import com.example.matholl.Services.IngredientService;
 import com.example.matholl.Services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +29,18 @@ public class RecipeController {
     private RecipeService recipeService;
     private IngredientService ingredientService;
 
+    private CommentService commentService;
+
     /**
      * The constructor
      * @param recipeService The recipe service
      * @param ingredientService The ingredient service
      */
     @Autowired
-    public RecipeController(RecipeService recipeService, IngredientService ingredientService) {
+    public RecipeController(RecipeService recipeService, IngredientService ingredientService, CommentService commentService) {
         this.recipeService = recipeService;
         this.ingredientService = ingredientService;
+        this.commentService = commentService;
     }
 
     /**
@@ -89,6 +94,12 @@ public class RecipeController {
     public Recipe getRecipeByID(@PathVariable("recipeId") String id) {
         Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
         return recipe;
+    }
+
+    @GetMapping(value = "/recipe/{recipeId}/comments")
+    public List<Comment> getCommentsByRecipeID(@PathVariable("recipeId") String id) {
+        List<Comment> comments = commentService.findByRecipeID(Long.parseLong(id));
+        return comments;
     }
 
     /**

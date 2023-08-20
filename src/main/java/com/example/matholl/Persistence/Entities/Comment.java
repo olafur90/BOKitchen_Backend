@@ -53,23 +53,14 @@ public class Comment {
         this.dateCreated = dateCreated;
     }
 
-    public LocalTime getTimeCreated() {
-        return timeCreated;
-    }
-
-    public void setTimeCreated(LocalTime timeCreated) {
-        this.timeCreated = timeCreated;
-    }
-
-    public Comment(String commentBody, long recipeID, LocalDate dateCreated, LocalTime timeCreated) {
+    public Comment(String commentBody, long recipeID) {
         this.commentBody = commentBody;
         this.recipeID = recipeID;
-        this.dateCreated = dateCreated;
-        this.timeCreated = timeCreated;
+        this.dateCreated = LocalDate.now();
     }
 
     public Comment() {
-
+        this.dateCreated = LocalDate.now();
     }
 
     private LocalTime timeCreated;
