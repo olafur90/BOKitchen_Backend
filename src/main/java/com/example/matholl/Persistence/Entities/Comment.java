@@ -6,7 +6,6 @@
 package com.example.matholl.Persistence.Entities;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -17,7 +16,7 @@ public class Comment {
     private long ID;
     private String commentBody;
 
-    private String user;
+    private String userName;
     private long recipeID;
     private LocalDateTime dateCreated;
 
@@ -56,10 +55,11 @@ public class Comment {
         this.dateCreated = dateCreated;
     }
 
-    public Comment(String commentBody, long recipeID) {
+    public Comment(String commentBody, long recipeID, String userName) {
         this.commentBody = commentBody;
         this.recipeID = recipeID;
         this.dateCreated = LocalDateTime.now();
+        this.userName = userName;
     }
 
     public Comment() {
@@ -68,11 +68,11 @@ public class Comment {
 
     private LocalTime timeCreated;
 
-    public String getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
