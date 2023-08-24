@@ -23,12 +23,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("uppskriftir")
-// Cross origins http://mathollbackend-production.up.railway.app and localhost:4200
 @CrossOrigin(origins = {"http://localhost:4200", "https://mathollfrontend-production.up.railway.app/"})
 public class RecipeController {
     private RecipeService recipeService;
     private IngredientService ingredientService;
-
     private CommentService commentService;
 
     /**
@@ -68,12 +66,21 @@ public class RecipeController {
         return HttpStatus.BAD_REQUEST;
     }
 
+    /**
+     * Gets all recipes on the server
+     * @return A list of recipes
+     */
     @GetMapping(value = "/")
     public List<Recipe> getAllRecipes() {
         List<Recipe> recipes = recipeService.findAll();
         return recipes;
     }
 
+    /**
+     * Searches for recipes by a query
+     * @param query The query to search for
+     * @return A list of recipes that match the query
+     */
     @GetMapping(value = "/search")
     public List<Recipe> searchRecipes(@RequestParam String query) {
         List<Recipe> recipes = recipeService.searchRecipes(query);
@@ -83,25 +90,43 @@ public class RecipeController {
         return recipes;
     }
 
-    // Get all recipes by category
+    /**
+     * Gets recipes by category
+     * @param category The category of the recipes to get
+     * @return A list of recipes that match the category
+     */
     @GetMapping(value = "/flokkar/{category}")
     public List<Recipe> getRecipesByCategory(@PathVariable("category") String category) {
         List<Recipe> recipes = recipeService.findByCategory(category);
         return recipes;
     }
 
+    /**
+     * Gets a recipe by id
+     * @param id The id of the recipe to get
+     * @return The recipe with the given id if it exists else null
+     */
     @GetMapping(value = "/recipe/{recipeId}")
     public Recipe getRecipeByID(@PathVariable("recipeId") String id) {
         Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
         return recipe;
     }
 
+    /**
+     * Gets all comments for a recipe
+     * @param id The id of the recipe
+     * @return A list of comments
+     */
     @GetMapping(value = "/recipe/{recipeId}/comments")
     public List<Comment> getCommentsByRecipeID(@PathVariable("recipeId") String id) {
         List<Comment> comments = commentService.findByRecipeID(Long.parseLong(id));
         return comments;
     }
 
+    /**
+     * Adds a comment to a recipe
+     * @param comment
+     */
     @PostMapping(value = "/recipe/{recipeId}/comments")
     public void addComment(@RequestBody Comment comment) {
         commentService.save(comment);
@@ -161,23 +186,4 @@ public class RecipeController {
 
         return HttpStatus.METHOD_NOT_ALLOWED;
     }
-
-    @PostMapping(value = "/addDummyData")
-    public HttpStatus dummyData(){
-        addDummyData();
-        return HttpStatus.OK;
-    }
-
-    private void addDummyData() {
-        for (int i = 0; i < 20; i++) {
-            Recipe recipe = new Recipe();
-            recipe.setName("Recipe" + i);
-            recipe.setTimeToCookInMinutes(10);
-            recipe.setForNumberOfPeople(i);
-            recipe.setDateAdded(LocalDateTime.now());
-
-            recipeService.save(recipe);
-        }
-    }
-
 }
