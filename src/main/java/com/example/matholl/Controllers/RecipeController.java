@@ -102,6 +102,11 @@ public class RecipeController {
         return comments;
     }
 
+    @PostMapping(value = "/recipe/{recipeId}/comments")
+    public void addComment(@RequestBody Comment comment) {
+        commentService.save(comment);
+    }
+
     /**
      * Gets a list of recent recipes from the server
      * @return A list of recipes

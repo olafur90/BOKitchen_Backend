@@ -7,6 +7,7 @@ package com.example.matholl.Persistence.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -15,8 +16,10 @@ public class Comment {
 
     private long ID;
     private String commentBody;
+
+    private String user;
     private long recipeID;
-    private LocalDate dateCreated;
+    private LocalDateTime dateCreated;
 
     @Id
     @Column(name = "CommentId")
@@ -45,23 +48,31 @@ public class Comment {
         this.recipeID = recipeID;
     }
 
-    public LocalDate getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 
     public Comment(String commentBody, long recipeID) {
         this.commentBody = commentBody;
         this.recipeID = recipeID;
-        this.dateCreated = LocalDate.now();
+        this.dateCreated = LocalDateTime.now();
     }
 
     public Comment() {
-        this.dateCreated = LocalDate.now();
+        this.dateCreated = LocalDateTime.now();
     }
 
     private LocalTime timeCreated;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 }
