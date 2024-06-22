@@ -1,4 +1,5 @@
 DELETE FROM available_categories;
+DELETE FROM user_roles;
 DELETE FROM users;
 
 INSERT INTO available_categories (icelandic_name, name, image_path)
