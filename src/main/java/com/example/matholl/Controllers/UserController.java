@@ -22,8 +22,6 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public boolean loginUserGET(@RequestBody String userEmail, String password) {
-        System.out.println(userEmail);
-        System.out.println(password);
         try {
             User user = userService.findByEmail(userEmail);
             return user.getPassword().equals(password);
@@ -37,5 +35,16 @@ public class UserController {
     public String logOutUser(HttpSession session) {
         session.removeAttribute("userLoggedIn");
         return "redirect:/";
+    }
+
+    @PostMapping(value = "/register")
+    public User registerUserGET(@RequestBody User user) {
+        try {
+            userService.save(user);
+            return user;
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 }

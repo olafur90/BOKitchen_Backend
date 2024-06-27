@@ -42,9 +42,9 @@ public class RecipeController {
     }
 
     /**
-     * Creates a new recipe on the server
-     * @param recipe The recipe to create
-     * @return CREATED if recipe is successfully created, BAD_REQUEST if not
+     * Adds a new recipe to the database.
+     * @param recipe The recipe object to be added.
+     * @return Status CODE 'CREATED' if recipe is successfully created, 'BAD_REQUEST' otherwise.
      */
     @PostMapping(value = "/add")
     public HttpStatus creteNewRecipe(@RequestBody Recipe recipe) {
@@ -67,7 +67,7 @@ public class RecipeController {
     }
 
     /**
-     * Gets all recipes on the server
+     * Gets all recipes from the server.
      * @return A list of recipes
      */
     @GetMapping(value = "/")
@@ -77,7 +77,7 @@ public class RecipeController {
     }
 
     /**
-     * Searches for recipes by a query
+     * Searches for recipes by a search query
      * @param query The query to search for
      * @return A list of recipes that match the query
      */
