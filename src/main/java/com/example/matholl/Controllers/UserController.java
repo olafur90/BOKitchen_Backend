@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 // TODO: Remember CORS for localhost and live
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200", "https://mathollfrontend-production.up.railway.app/"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://bokitchen.up.railway.app/"})
 public class UserController {
     UserService userService;
 

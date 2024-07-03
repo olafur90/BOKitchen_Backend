@@ -23,7 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("uppskriftir")
-@CrossOrigin(origins = {"http://localhost:4200", "https://mathollfrontend-production.up.railway.app/"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://bokitchen.up.railway.app/"})
 public class RecipeController {
     private RecipeService recipeService;
     private IngredientService ingredientService;

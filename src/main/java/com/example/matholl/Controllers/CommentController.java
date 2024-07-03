@@ -20,7 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("comments")
-@CrossOrigin(origins = {"http://localhost:4200", "https://mathollfrontend-production.up.railway.app/"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://bokitchen.up.railway.app/"})
 public class CommentController {
     private CommentService commentService;
 
