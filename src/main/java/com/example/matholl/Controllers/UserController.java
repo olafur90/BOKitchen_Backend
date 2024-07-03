@@ -37,6 +37,7 @@ public class UserController {
         return "redirect:/";
     }
 
+    /*
     @PostMapping(value = "/register")
     public User registerUserGET(@RequestBody User user) {
         try {
@@ -47,4 +48,6 @@ public class UserController {
             return null;
         }
     }
+    */
+
 }
