@@ -48,10 +48,14 @@ public class RecipeController {
      */
     @PostMapping(value = "/add")
     public HttpStatus creteNewRecipe(@RequestBody Recipe recipe) {
+        System.out.println(recipe.toString());
+        // print each attribute of the recipe
         if (
-                recipe.getName() == null ||
                 //recipe.getCategory() == null ||
+                recipe.getName() == null ||
+                recipe.getName() == "" ||
                 recipe.getInstructions() == null ||
+                recipe.getInstructions() == "" ||
                 recipe.getForNumberOfPeople() == 0 ||
                 recipe.getTimeToCookInMinutes() == 0 ||
                 recipe.getDifficulty() == null
@@ -59,11 +63,13 @@ public class RecipeController {
             return HttpStatus.BAD_REQUEST;
         }
 
+        /* Má eyða ef ternary hér fyrir neðan virkar ekki
         if (recipeService.save(recipe) != null) {
             return HttpStatus.CREATED;
         }
+        */
 
-        return HttpStatus.BAD_REQUEST;
+        return recipeService.save(recipe) != null ? HttpStatus.CREATED :  HttpStatus.BAD_REQUEST;
     }
 
     /**

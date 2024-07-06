@@ -160,4 +160,19 @@ public class Recipe implements Comparable<Recipe> {
         // Compare by time
         return this.getDateAdded().compareTo(o.getDateAdded());
     }
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "ID=" + ID +
+                ", name='" + name + '\'' +
+                ", timeToCookInMinutes=" + timeToCookInMinutes +
+                ", forNumberOfPeople=" + forNumberOfPeople +
+                ", dateAdded=" + dateAdded +
+                ", user=" + user +
+                ", difficulty=" + difficulty +
+                ", category='" + category + '\'' +
+                ", instructions='" + instructions + '\'' +
+                ", baseImage='" + baseImage + '\'' +
+                '}';
+    }
 }
