@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 // @EnableJpaRepositories
 public class MathollApplication extends SpringBootServletInitializer {
 
+	// Til að geta notað env breytur hvort sem er í dev eða prod
 	@Autowired
 	private Environment env;
 
