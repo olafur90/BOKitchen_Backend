@@ -14,10 +14,14 @@ import java.time.LocalTime;
 public class Comment {
 
     private long ID;
+
+    @Lob
     private String commentBody;
 
     private String userName;
+
     private long recipeID;
+
     private LocalDateTime dateCreated;
 
     @Id
@@ -31,6 +35,7 @@ public class Comment {
         this.ID = ID;
     }
 
+    @Lob
     public String getCommentBody() {
         return commentBody;
     }
