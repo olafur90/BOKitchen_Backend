@@ -4,6 +4,17 @@ import javax.persistence.*;
 
 import java.util.List;
 
+/*
+    TODO: Er aldrei að búa til notanda fyrir innskráningu. Breyta þessu í að vera frekar notendastillingar sem notandi
+    TODO: getur stillt á prófíl síðunni sinni. T.d. notendanafn. Gæti einnig haldið utan um hluti eins og comment
+    TODO: sem notandi hefur skrifað, uppskriftir sem notandi hefur póstað, eitthvað með "Karma?", fær stig fyrir eitthvað
+    TODO: getur sett inn heimilisfang og aðrar upplýsingar, en það er örugglega óþarfi.
+
+    TODO: Ætti að þurfa id, username, email, comment[], recipe[], first_name, last_name, karma
+
+    TODO: Notification/Messages system? Karma system?
+*/
+
 @Entity
 @Table(name = "users")
 public class User {
