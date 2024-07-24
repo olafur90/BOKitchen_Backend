@@ -20,16 +20,19 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) { this.userService = userService; }
 
+    /* FIXME: Maybe OK to remove since we're using Auth0 for login
     @PostMapping(value = "/login")
     public boolean loginUserGET(@RequestBody String userEmail, String password) {
         try {
             User user = userService.findByEmail(userEmail);
-            return user.getPassword().equals(password);
+            //return user.getPassword().equals(password);
+            return false;
         }
         catch (Exception e) {
             return false;
         }
     }
+     */
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logOutUser(HttpSession session) {

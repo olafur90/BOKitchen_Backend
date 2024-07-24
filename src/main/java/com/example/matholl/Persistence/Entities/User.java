@@ -20,21 +20,15 @@ import java.util.List;
 public class User {
 
     private long ID;
-    private String password;
     private String firstName;
     private String lastName;
-    private String username;
+    private String preferredUsername;
     private String email;
-    private List<Recipe> recipes;
+    //private List<Recipe> recipesUploadedByUser;
+    private Comment[] commentsPostedByUser;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    public List<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
-    }
+    // TODO: Need to figure out how I will be storing images. Cloudinary? Something else maybe better now.
+    private String userPictureURL;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,12 +40,33 @@ public class User {
         this.ID = ID;
     }
 
-    public String getUsername() {
-        return username;
+    /*
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    public List<Recipe> getRecipesUploadedByUser() {
+        return recipesUploadedByUser;
+    }
+    */
+
+    public void setCommentsPostedByUser(Comment[] commentsPostedByUser) {
+        this.commentsPostedByUser = commentsPostedByUser;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public Comment[] getCommentsPostedByUser() {
+        return commentsPostedByUser;
+    }
+
+    /*
+    public void setRecipesUploadedByUser(List<Recipe> recipesUploadedByUser) {
+        this.recipesUploadedByUser = recipesUploadedByUser;
+    }
+     */
+
+    public String getUserPictureURL() {
+        return userPictureURL;
+    }
+
+    public void setUserPictureURL(String userPictureURL) {
+        this.userPictureURL = userPictureURL;
     }
 
     public String getEmail() {
@@ -60,14 +75,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -86,16 +93,38 @@ public class User {
         this.lastName = lastName;
     }
 
-    public User(String username, String email, String password, String firstName, String lastName) {
-        this.username = username;
+    public String getPreferredUsername() {
+        return preferredUsername;
+    }
+
+    public void setPreferredUsername(String preferredUsername) {
+        this.preferredUsername = preferredUsername;
+    }
+
+    public User(String preferredUsername, String email, String firstName, String lastName) {
+        this.preferredUsername = preferredUsername;
         this.email = email;
-        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public User() {
 
+    }
+
+    // Add the toString() method
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "ID=" + ID +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", preferredUsername='" + preferredUsername + '\'' +
+                ", email='" + email + '\'' +
+                ", commentsPostedByUser=" + commentsPostedByUser +
+                ", userPictureURL='" + userPictureURL + '\'' +
+                '}';
     }
 
 }

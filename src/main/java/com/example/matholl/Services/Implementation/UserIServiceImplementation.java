@@ -24,8 +24,8 @@ public class UserIServiceImplementation implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findByPreferredUsername(String username) {
+        return null;
     }
 
     @Override
@@ -50,10 +50,6 @@ public class UserIServiceImplementation implements UserService {
 
     @Override
     public User login(User user) {
-        User exists = findByEmail(user.getEmail());
-        if (exists != null && exists.getPassword().equals(user.getPassword())) {
-            return exists;
-        }
         return null;
     }
 }

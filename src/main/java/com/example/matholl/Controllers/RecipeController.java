@@ -10,6 +10,7 @@ import com.example.matholl.Persistence.Entities.Recipe;
 import com.example.matholl.Services.CommentService;
 import com.example.matholl.Services.IngredientService;
 import com.example.matholl.Services.RecipeService;
+import com.example.matholl.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class RecipeController {
     private RecipeService recipeService;
     private IngredientService ingredientService;
     private CommentService commentService;
+    private UserService userService;
 
     /**
      * The constructor
@@ -35,10 +37,11 @@ public class RecipeController {
      * @param ingredientService The ingredient service
      */
     @Autowired
-    public RecipeController(RecipeService recipeService, IngredientService ingredientService, CommentService commentService) {
+    public RecipeController(RecipeService recipeService, IngredientService ingredientService, CommentService commentService, UserService userService) {
         this.recipeService = recipeService;
         this.ingredientService = ingredientService;
         this.commentService = commentService;
+        this.userService = userService;
     }
 
     /**
@@ -48,26 +51,27 @@ public class RecipeController {
      */
     @PostMapping(value = "/add")
     public HttpStatus creteNewRecipe(@RequestBody Recipe recipe) {
+
         System.out.println(recipe.toString());
-        // print each attribute of the recipe
         if (
-                //recipe.getCategory() == null ||
+                recipe.getCategory() == null ||
                 recipe.getName() == null ||
                 recipe.getName() == "" ||
                 recipe.getInstructions() == null ||
                 recipe.getInstructions() == "" ||
                 recipe.getForNumberOfPeople() == 0 ||
                 recipe.getTimeToCookInMinutes() == 0 ||
-                recipe.getDifficulty() == null
+                recipe.getDifficulty() == null ||
+                recipe.getUser() == null
         ) {
             return HttpStatus.BAD_REQUEST;
         }
 
-        /* Má eyða ef ternary hér fyrir neðan virkar ekki
-        if (recipeService.save(recipe) != null) {
-            return HttpStatus.CREATED;
+        if (userService.findByEmail(recipe.getUser().getEmail()) == null) {
+            userService.save(recipe.getUser());
+        } else {
+            recipe.setUser(userService.findByEmail(recipe.getUser().getEmail()));
         }
-        */
 
         return recipeService.save(recipe) != null ? HttpStatus.CREATED :  HttpStatus.BAD_REQUEST;
     }

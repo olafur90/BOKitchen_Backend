@@ -165,11 +165,11 @@ public class Recipe implements Comparable<Recipe> {
         return "Recipe{" +
                 "ID=" + ID +
                 ", name='" + name + '\'' +
-                ", timeToCookInMinutes=" + timeToCookInMinutes +
-                ", forNumberOfPeople=" + forNumberOfPeople +
-                ", dateAdded=" + dateAdded +
-                ", user=" + user +
-                ", difficulty=" + difficulty +
+                ", timeToCookInMinutes=" + timeToCookInMinutes + '\'' +
+                ", forNumberOfPeople=" + forNumberOfPeople + '\'' +
+                ", dateAdded=" + dateAdded + '\'' +
+                ", user=" + user + '\'' +
+                ", difficulty=" + difficulty + '\'' +
                 ", category='" + category + '\'' +
                 ", instructions='" + instructions + '\'' +
                 ", baseImage='" + baseImage + '\'' +
