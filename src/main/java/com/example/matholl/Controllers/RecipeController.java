@@ -7,6 +7,7 @@ package com.example.matholl.Controllers;
 import com.example.matholl.Persistence.Entities.Comment;
 import com.example.matholl.Persistence.Entities.Ingredient;
 import com.example.matholl.Persistence.Entities.Recipe;
+import com.example.matholl.Persistence.Entities.RecipeDTO;
 import com.example.matholl.Services.CommentService;
 import com.example.matholl.Services.IngredientService;
 import com.example.matholl.Services.RecipeService;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The controller for the recipe API
@@ -84,6 +87,23 @@ public class RecipeController {
     public List<Recipe> getAllRecipes() {
         List<Recipe> recipes = recipeService.findAll();
         return recipes;
+    }
+
+    @GetMapping(value = "/minimum")
+    public List<RecipeDTO> getMinimum() {
+        List<Recipe> recipes = recipeService.findAll();
+        List<RecipeDTO> result = new ArrayList<>();
+
+        for (Recipe recipe : recipes) {
+            RecipeDTO dto = new RecipeDTO(
+                    recipe.getID(),
+                    recipe.getName(),
+                    recipe.getDateAdded() // Adjust if using a different type
+            );
+            result.add(dto);
+        }
+
+        return result;
     }
 
     /**
