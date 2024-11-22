@@ -14,6 +14,8 @@ import com.example.matholl.Services.RecipeService;
 import com.example.matholl.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -53,30 +55,15 @@ public class RecipeController {
      * @return Status CODE 'CREATED' if recipe is successfully created, 'BAD_REQUEST' otherwise.
      */
     @PostMapping(value = "/add")
-    public HttpStatus creteNewRecipe(@RequestBody Recipe recipe) {
-
-        System.out.println(recipe.toString());
-        if (
-                recipe.getCategory() == null ||
-                recipe.getName() == null ||
-                recipe.getName() == "" ||
-                recipe.getInstructions() == null ||
-                recipe.getInstructions() == "" ||
-                recipe.getForNumberOfPeople() == 0 ||
-                recipe.getTimeToCookInMinutes() == 0 ||
-                recipe.getDifficulty() == null ||
-                recipe.getUser() == null
-        ) {
-            return HttpStatus.BAD_REQUEST;
-        }
-
+    public ResponseEntity<Void> createNewRecipe(@Validated @RequestBody Recipe recipe) {
         if (userService.findByEmail(recipe.getUser().getEmail()) == null) {
             userService.save(recipe.getUser());
         } else {
             recipe.setUser(userService.findByEmail(recipe.getUser().getEmail()));
         }
 
-        return recipeService.save(recipe) != null ? HttpStatus.CREATED :  HttpStatus.BAD_REQUEST;
+        boolean isSaved = recipeService.save(recipe) != null;
+        return isSaved ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
     /**
@@ -84,26 +71,23 @@ public class RecipeController {
      * @return A list of recipes
      */
     @GetMapping(value = "/")
-    public List<Recipe> getAllRecipes() {
+    public ResponseEntity<List<Recipe>> getAllRecipes() {
         List<Recipe> recipes = recipeService.findAll();
-        return recipes;
-    }
 
-    @GetMapping(value = "/minimum")
-    public List<RecipeDTO> getMinimum() {
-        List<Recipe> recipes = recipeService.findAll();
-        List<RecipeDTO> result = new ArrayList<>();
-
-        for (Recipe recipe : recipes) {
-            RecipeDTO dto = new RecipeDTO(
-                    recipe.getID(),
-                    recipe.getName(),
-                    recipe.getDateAdded() // Adjust if using a different type
-            );
-            result.add(dto);
+        if (recipes == null || recipes.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Returns 204 No Content if no recipes are found
         }
 
-        return result;
+        return ResponseEntity.ok(recipes); // Returns 200 OK with the list of recipes
+    }
+
+    /**
+     * Gets DTOs of all recipes
+     * @return
+     */
+    @GetMapping(value = "/minimum")
+    public List<RecipeDTO> getMinimum() {
+        return recipeService.getDTOs();
     }
 
     /**
@@ -112,12 +96,14 @@ public class RecipeController {
      * @return A list of recipes that match the query
      */
     @GetMapping(value = "/search")
-    public List<Recipe> searchRecipes(@RequestParam String query) {
+    public ResponseEntity<List<Recipe>> searchRecipes(@RequestParam String query) {
         List<Recipe> recipes = recipeService.searchRecipes(query);
-        if (recipes.isEmpty()) {
-            return new ArrayList<>();
+
+        if (recipes == null || recipes.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Returns 204 No Content if no recipes are found
         }
-        return recipes;
+
+        return ResponseEntity.ok(recipes); // Returns 200 OK with the list of recipes
     }
 
     /**
@@ -126,9 +112,14 @@ public class RecipeController {
      * @return A list of recipes that match the category
      */
     @GetMapping(value = "/flokkar/{category}")
-    public List<Recipe> getRecipesByCategory(@PathVariable("category") String category) {
+    public ResponseEntity<List<Recipe>> getRecipesByCategory(@PathVariable("category") String category) {
         List<Recipe> recipes = recipeService.findByCategory(category);
-        return recipes;
+
+        if (recipes == null || recipes.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Returns 204 No Content if no recipes are found
+        }
+
+        return ResponseEntity.ok(recipes); // Returns 200 OK with the list of recipes
     }
 
     /**
@@ -137,9 +128,12 @@ public class RecipeController {
      * @return The recipe with the given id if it exists else null
      */
     @GetMapping(value = "/recipe/{recipeId}")
-    public Recipe getRecipeByID(@PathVariable("recipeId") String id) {
+    public ResponseEntity<Recipe> getRecipeByID(@PathVariable("recipeId") String id) {
         Recipe recipe = recipeService.findRecipeByID(Long.parseLong(id));
-        return recipe;
+        if (recipe == null) {
+            return ResponseEntity.notFound().build(); // Returns 404
+        }
+        return ResponseEntity.ok(recipe); // Returns 200 with the recipe
     }
 
     /**
@@ -149,8 +143,7 @@ public class RecipeController {
      */
     @GetMapping(value = "/recipe/{recipeId}/comments")
     public List<Comment> getCommentsByRecipeID(@PathVariable("recipeId") String id) {
-        List<Comment> comments = commentService.findByRecipeID(Long.parseLong(id));
-        return comments;
+        return commentService.findByRecipeID(Long.parseLong(id));
     }
 
     /**
@@ -162,27 +155,50 @@ public class RecipeController {
         commentService.save(comment);
     }
 
+    @GetMapping(value = "/mostRecentRecipe")
+    public ResponseEntity<Recipe> getMostRecent() {
+        List<Recipe> recipes = recipeService.findAll();
+        if (recipes == null || recipes.size() == 0) {
+            return ResponseEntity.noContent().build();
+        }
+        recipes.sort((recipe1, recipe2) -> recipe2.getDateAdded().compareTo(recipe1.getDateAdded()));
+        return ResponseEntity.ok(recipes.get(0));
+    }
+
+    @GetMapping(value = "/recipeCount")
+    public int getRecipeCount() {
+        return recipeService.findAll().size();
+    }
+
     /**
      * Gets a list of recent recipes from the server
+     * @param pageIndex The requested index, used for paging in frontend client
+     * @param requestedNumberOfRecipes the number of requested recipes
      * @return A list of recipes
      */
     @GetMapping(value = "/recentRecipes")
-    public List<Recipe> getRecentRecipes(){
+    public ResponseEntity<List<Recipe>> getRecentRecipes(@RequestParam int pageIndex, @RequestParam int requestedNumberOfRecipes) {
         List<Recipe> recipes = recipeService.findAll();
-
-        int maxNumberOfRecents = 7;
         int totalNumberOfRecipes = recipes.size();
 
         if (totalNumberOfRecipes == 0) {
-            return null;
+            return ResponseEntity.noContent().build(); // 204
         }
 
-        else if (totalNumberOfRecipes < maxNumberOfRecents) {
-            return recipes;
+        else if (totalNumberOfRecipes < requestedNumberOfRecipes) {
+            return ResponseEntity.ok(recipes);
         }
 
         recipes.sort((recipe1, recipe2) -> recipe2.getDateAdded().compareTo(recipe1.getDateAdded()));
-        return recipes.subList(0, maxNumberOfRecents);
+
+        int startIndex = (pageIndex) * requestedNumberOfRecipes;
+        int endIndex = startIndex + requestedNumberOfRecipes;
+
+        if (endIndex > totalNumberOfRecipes) {
+            endIndex = totalNumberOfRecipes;
+        }
+
+        return ResponseEntity.ok(recipes.subList(startIndex, endIndex));
     }
 
     /**
@@ -190,15 +206,15 @@ public class RecipeController {
      * @return A recipe object
      */
     @GetMapping(value = "/latestRecipe")
-    public Recipe getLatestRecipe(){
+    public ResponseEntity<Recipe> getLatestRecipe(){
         List<Recipe> recipes = recipeService.findAll();
 
         if (recipes == null || recipes.size() == 0) {
-            return null;
+            return ResponseEntity.noContent().build(); // 204
         }
 
         recipes.sort((recipe1, recipe2) -> recipe2.getDateAdded().compareTo(recipe1.getDateAdded()));
-        return recipes.get(0);
+        return ResponseEntity.ok(recipes.get(0));
     }
 
     /**
@@ -208,12 +224,9 @@ public class RecipeController {
      * @return 200 if recipe is successfully edited, 405 Method Not Allowed otherwise
      */
     @PostMapping(value = "/{foodtype}/{id}/editRecipe")
-    public HttpStatus editRecipe(Recipe recipe, @PathVariable("id") String id) {
+    public ResponseEntity<Void> editRecipe(@RequestBody Recipe recipe, @PathVariable("id") String id) {
         recipe.setID(Long.parseLong(id));
-        if (recipeService.save(recipe) != null) {
-            return HttpStatus.OK;
-        }
-
-        return HttpStatus.METHOD_NOT_ALLOWED;
+        boolean isEdited = recipeService.save(recipe) != null;
+        return isEdited ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
     }
 }

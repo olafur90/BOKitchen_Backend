@@ -1,11 +1,13 @@
 package com.example.matholl.Services.Implementation;
 
 import com.example.matholl.Persistence.Entities.Recipe;
+import com.example.matholl.Persistence.Entities.RecipeDTO;
 import com.example.matholl.Persistence.Repositories.RecipeRepository;
 import com.example.matholl.Services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,6 +56,20 @@ public class RecipeServiceImplementation implements RecipeService {
     @Override
     public List<Recipe> findRecipesWithTimeBetween(int minTime, int maxTime) {
         return null;
+    }
+
+    public List<RecipeDTO> getDTOs() {
+        List<Recipe> recipes = this.findAll();
+        List<RecipeDTO> dtos = new ArrayList<>();
+        for (Recipe recipe : recipes) {
+            RecipeDTO dto = new RecipeDTO(
+                    recipe.getID(),
+                    recipe.getName(),
+                    recipe.getDateAdded()
+            );
+            dtos.add(dto);
+        }
+        return dtos;
     }
 
     @Override

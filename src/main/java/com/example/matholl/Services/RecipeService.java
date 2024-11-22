@@ -1,6 +1,7 @@
 package com.example.matholl.Services;
 
 import com.example.matholl.Persistence.Entities.Recipe;
+import com.example.matholl.Persistence.Entities.RecipeDTO;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface RecipeService {
     public List<Recipe> save(List<Recipe> recipes);
     public void delete(Recipe recipe);
     public List<Recipe> searchRecipes(String query);
+    public List<RecipeDTO> getDTOs();
+
 }
